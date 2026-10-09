@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#080b14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>جیم‌بادی 💪 مربی شخصی</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    fontFamily: { sans: ['Vazirmatn','system-ui','sans-serif'] },
+    colors: {
+      pri:  'rgb(var(--c-pri) / <alpha-value>)',
+      sec:  'rgb(var(--c-sec) / <alpha-value>)',
+      acc:  'rgb(var(--c-acc) / <alpha-value>)',
+      bgc:  'rgb(var(--c-bg) / <alpha-value>)',
+      surf: 'rgb(var(--c-surf) / <alpha-value>)',
+      surf2:'rgb(var(--c-surf2) / <alpha-value>)',
+      txt:  'rgb(var(--c-txt) / <alpha-value>)',
+      mut:  'rgb(var(--c-mut) / <alpha-value>)'
+    }
+  }}
+}
+</script>
+<style>
+/* ===================== THEMES ===================== */
+:root{
+  --c-pri:0 212 255; --c-sec:124 58 237; --c-acc:56 189 248;
+  --c-bg:8 11 20; --c-surf:17 23 39; --c-surf2:28 36 56;
+  --c-txt:235 242 255; --c-mut:140 155 180; --radius:1.25rem;
+}
+[data-theme="volcano"]{--c-pri:255 107 53;--c-sec:239 68 68;--c-acc:251 191 36;--c-bg:18 11 9;--c-surf:32 20 17;--c-surf2:48 30 25;--c-txt:255 240 232;--c-mut:186 150 135}
+[data-theme="arctic"]{--c-pri:34 211 238;--c-sec:148 163 184;--c-acc:96 165 250;--c-bg:10 14 20;--c-surf:20 27 37;--c-surf2:33 43 56;--c-txt:231 243 250;--c-mut:142 162 180}
+[data-theme="ocean"]{--c-pri:20 184 166;--c-sec:59 130 246;--c-acc:45 212 191;--c-bg:7 16 28;--c-surf:13 28 45;--c-surf2:21 42 64;--c-txt:225 245 250;--c-mut:130 165 185}
+[data-theme="gold"]{--c-pri:245 158 11;--c-sec:234 179 8;--c-acc:253 224 71;--c-bg:14 13 10;--c-surf:26 23 17;--c-surf2:41 36 25;--c-txt:252 246 230;--c-mut:176 164 135}
+[data-theme="toxic"]{--c-pri:57 255 20;--c-sec:132 204 22;--c-acc:190 242 100;--c-bg:6 14 7;--c-surf:13 26 15;--c-surf2:22 41 25;--c-txt:233 255 230;--c-mut:139 175 140}
+[data-theme="violet"]{--c-pri:167 139 250;--c-sec:217 70 239;--c-acc:196 181 253;--c-bg:14 9 24;--c-surf:25 17 41;--c-surf2:39 27 62;--c-txt:243 235 255;--c-mut:160 145 190}
+[data-theme="sunset"]{--c-pri:251 113 133;--c-sec:249 115 22;--c-acc:168 85 247;--c-bg:19 9 17;--c-surf:33 17 30;--c-surf2:50 26 45;--c-txt:255 238 248;--c-mut:190 150 175}
+
+*{-webkit-tap-highlight-color:transparent}
+html,body{overscroll-behavior-y:contain}
+body{
+  font-family:'Vazirmatn',system-ui,sans-serif;
+  background:rgb(var(--c-bg)); color:rgb(var(--c-txt));
+  margin:0; min-height:100dvh; position:relative; overflow-x:hidden;
+}
+/* ===== Animated background ===== */
+#bgfx{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.42;mix-blend-mode:screen}
+.b1{width:60vw;height:60vw;background:rgb(var(--c-pri));top:-18vw;right:-14vw;animation:fl1 16s ease-in-out infinite}
+.b2{width:55vw;height:55vw;background:rgb(var(--c-sec));bottom:-20vw;left:-16vw;animation:fl2 20s ease-in-out infinite}
+.b3{width:42vw;height:42vw;background:rgb(var(--c-acc));top:38%;left:28%;animation:fl3 24s ease-in-out infinite;opacity:.26}
+@keyframes fl1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-8vw,10vh) scale(1.18)}}
+@keyframes fl2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(9vw,-9vh) scale(1.15)}}
+@keyframes fl3{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(10vw,6vh) scale(.85)}66%{transform:translate(-7vw,-8vh) scale(1.1)}}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.035;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.particle{position:fixed;border-radius:50%;background:rgb(var(--c-pri));pointer-events:none;z-index:-1;opacity:.35;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(100vh) scale(.4);opacity:0}10%{opacity:.4}100%{transform:translateY(-10vh) scale(1);opacity:0}}
+.no-anim .blob,.no-anim .particle{animation:none!important}
+
+/* ===== UI ===== */
+.glass{background:rgb(var(--c-surf)/.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgb(var(--c-pri)/.14)}
+.card{background:rgb(var(--c-surf)/.78);backdrop-filter:blur(14px);border:1px solid rgb(var(--c-pri)/.13);border-radius:var(--radius)}
+.glow{box-shadow:0 0 28px -6px rgb(var(--c-pri)/.5)}
+.glow-sm{box-shadow:0 0 16px -4px rgb(var(--c-pri)/.45)}
+.grad{background:linear-gradient(135deg,rgb(var(--c-pri)),rgb(var(--c-sec)))}
+.grad-t{background:linear-gradient(135deg,rgb(var(--c-pri)),rgb(var(--c-acc)),rgb(var(--c-sec)));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 200%;animation:gm 6s ease infinite}
+@keyframes gm{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.btn{border-radius:1rem;font-weight:700;transition:.18s;display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
+.btn:active{transform:scale(.94)}
+.btn-p{background:linear-gradient(135deg,rgb(var(--c-pri)),rgb(var(--c-sec)));color:#fff;box-shadow:0 6px 22px -8px rgb(var(--c-pri)/.85)}
+.btn-g{background:rgb(var(--c-surf2)/.9);color:rgb(var(--c-txt));border:1px solid rgb(var(--c-pri)/.18)}
+.inp{background:rgb(var(--c-surf2)/.85);border:1px solid rgb(var(--c-pri)/.18);border-radius:.85rem;padding:.6rem .8rem;color:rgb(var(--c-txt));width:100%;outline:none;font-family:inherit;font-size:.95rem}
+.inp:focus{border-color:rgb(var(--c-pri)/.65);box-shadow:0 0 0 3px rgb(var(--c-pri)/.14)}
+select.inp{appearance:none}
+.chip{padding:.3rem .7rem;border-radius:999px;font-size:.75rem;font-weight:700;background:rgb(var(--c-pri)/.14);color:rgb(var(--c-pri));border:1px solid rgb(var(--c-pri)/.3)}
+::-webkit-scrollbar{width:0;height:0}
+.fade-in{animation:fi .34s ease both}
+@keyframes fi{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.pop{animation:pp .3s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes pp{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:scale(1)}}
+
+/* ===== Coach Buddy ===== */
+#buddy{position:fixed;z-index:70;width:66px;height:66px;touch-action:none;transition:width .2s,height .2s}
+#buddyBtn{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;font-size:32px;
+ background:linear-gradient(135deg,rgb(var(--c-pri)/.95),rgb(var(--c-sec)/.95));
+ box-shadow:0 0 0 3px rgb(var(--c-bg)),0 0 26px -2px rgb(var(--c-pri)/.85);cursor:grab;user-select:none;position:relative}
+#buddy.mini{width:46px;height:46px}#buddy.mini #buddyBtn{font-size:22px}
+#buddyBadge{position:absolute;top:-5px;left:-5px;font-size:17px;filter:drop-shadow(0 2px 4px #000)}
+.a-idle{animation:bIdle 2.8s ease-in-out infinite}
+@keyframes bIdle{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-5px) scale(1.04)}}
+.a-lift{animation:bLift .62s ease-in-out infinite}
+@keyframes bLift{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-9px) rotate(6deg)}}
+.a-cheer{animation:bCheer .45s ease-in-out infinite}
+@keyframes bCheer{0%,100%{transform:scale(1) rotate(-10deg)}50%{transform:scale(1.22) rotate(10deg)}}
+.a-warn{animation:bWarn .32s linear infinite}
+@keyframes bWarn{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.a-sleep{animation:bSleep 3.4s ease-in-out infinite;opacity:.72}
+@keyframes bSleep{0%,100%{transform:rotate(-8deg) scale(.95)}50%{transform:rotate(8deg) scale(1)}}
+#bubble{position:fixed;z-index:69;max-width:min(80vw,310px);padding:.75rem .9rem;border-radius:1.1rem;
+ background:rgb(var(--c-surf)/.97);border:1px solid rgb(var(--c-pri)/.4);color:rgb(var(--c-txt));
+ font-size:.86rem;line-height:1.75;box-shadow:0 10px 36px -10px #000;opacity:0;transform:scale(.8);
+ transition:.26s cubic-bezier(.3,1.4,.5,1);pointer-events:none}
+#bubble.show{opacity:1;transform:scale(1)}
+
+/* ===== Timer ring ===== */
+.ring{transform:rotate(-90deg)}
+.ring circle{transition:stroke-dashoffset .25s linear}
+.pulse-ring{animation:pr 1.1s ease-out infinite}
+@keyframes pr{0%{box-shadow:0 0 0 0 rgb(var(--c-pri)/.55)}100%{box-shadow:0 0 0 26px rgb(var(--c-pri)/0)}}
+.flash{animation:flsh .5s ease 3}
+@keyframes flsh{0%,100%{background:transparent}50%{background:rgb(var(--c-pri)/.2)}}
+
+/* ===== misc ===== */
+.setrow.done{background:rgb(34 197 94/.14);border-color:rgb(34 197 94/.4)}
+.confetti{position:fixed;width:9px;height:14px;z-index:95;pointer-events:none;animation:cf 2.4s linear forwards}
+@keyframes cf{0%{transform:translateY(-8vh) rotate(0);opacity:1}100%{transform:translateY(105vh) rotate(760deg);opacity:0}}
+.sheet{position:fixed;inset:0;z-index:80;display:none}
+.sheet.open{display:block}
+.sheet-bd{position:absolute;inset:0;background:#000a;backdrop-filter:blur(4px)}
+.sheet-pn{position:absolute;bottom:0;left:0;right:0;max-height:88dvh;overflow-y:auto;border-radius:1.6rem 1.6rem 0 0;
+ background:rgb(var(--c-surf));border-top:1px solid rgb(var(--c-pri)/.3);padding:1rem 1rem 2.2rem;animation:up .3s cubic-bezier(.2,1,.3,1)}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
+#nav{position:fixed;bottom:0;left:0;right:0;z-index:60;padding-bottom:env(safe-area-inset-bottom)}
+.nv{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:.5rem 0;font-size:.63rem;font-weight:700;color:rgb(var(--c-mut));transition:.2s}
+.nv.on{color:rgb(var(--c-pri))}
+.nv.on span:first-child{transform:translateY(-3px) scale(1.18);filter:drop-shadow(0 0 7px rgb(var(--c-pri)/.9))}
+.nv span:first-child{font-size:1.25rem;transition:.25s}
+#mini{position:fixed;bottom:76px;left:10px;right:10px;z-index:58;display:none}
+#mini.on{display:block}
+.bar{height:7px;border-radius:99px;background:rgb(var(--c-surf2));overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,rgb(var(--c-pri)),rgb(var(--c-acc)))}
+</style>
+</head>
+<body>
+
+<div id="bgfx"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div id="grain"></div>
+
+<!-- ============ HEADER ============ -->
+<header class="glass sticky top-0 z-50 px-4 py-3 flex items-center justify-between" style="padding-top:calc(.75rem + env(safe-area-inset-top))">
+  <div class="flex items-center gap-2">
+    <div class="w-9 h-9 rounded-xl grad grid place-items-center text-lg glow-sm">🏋️</div>
+    <div>
+      <div class="font-black text-[15px] grad-t leading-none">جیم‌بادی</div>
+      <div id="hdSub" class="text-[10px] text-mut mt-[3px]">مربی شخصی تو</div>
+    </div>
+  </div>
+  <div class="flex items-center gap-2">
+    <div id="hdStreak" class="chip">🔥 ۰</div>
+    <button onclick="go('settings')" class="w-9 h-9 rounded-xl btn btn-g text-base">⚙️</button>
+  </div>
+</header>
+
+<!-- ============ APP ============ -->
+<main id="app" class="px-4 pt-4 pb-40 max-w-xl mx-auto"></main>
+
+<!-- ============ MINI TIMER ============ -->
+<div id="mini">
+  <div class="card px-3 py-2 flex items-center gap-3 glow-sm" onclick="go('timer')">
+    <div class="text-2xl">⏱️</div>
+    <div class="flex-1">
+      <div id="miniTxt" class="font-black text-lg tabular-nums">۰۰:۰۰</div>
+      <div class="bar mt-1"><i id="miniBar" style="width:0%"></i></div>
+    </div>
+    <button onclick="event.stopPropagation();Timer.toggle()" id="miniBtn" class="btn btn-p w-10 h-10">⏸</button>
+  </div>
+</div>
+
+<!-- ============ NAV ============ -->
+<nav id="nav" class="glass">
+  <div class="flex max-w-xl mx-auto">
+    <button class="nv" data-nav="home"  onclick="go('home')"><span>🏠</span><span>خانه</span></button>
+    <button class="nv" data-nav="week"  onclick="go('week')"><span>📅</span><span>هفته</span></button>
+    <button class="nv" data-nav="timer" onclick="go('timer')"><span>⏱️</span><span>تایمر</span></button>
+    <button class="nv" data-nav="exercises" onclick="go('exercises')"><span>📚</span><span>حرکات</span></button>
+    <button class="nv" data-nav="stats" onclick="go('stats')"><span>📊</span><span>آمار</span></button>
+  </div>
+</nav>
+
+<!-- ============ COACH ============ -->
+<div id="bubble"></div>
+<div id="buddy"><div id="buddyBtn"><span id="buddyFace">🏋️‍♂️</span><span id="buddyBadge"></span></div></div>
+
+<!-- ============ SHEET ============ -->
+<div class="sheet" id="sheet"><div class="sheet-bd" onclick="closeSheet()"></div><div class="sheet-pn" id="sheetBody"></div></div>
+
+<script>
+/* ==========================================================================
+   ۰) ابزار پایه
+   ========================================================================== */
+const $=(s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelectorAll(s)];
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const pad=n=>String(n).padStart(2,'0');
+const mmss=s=>{s=Math.max(0,Math.round(s));return fa(pad(Math.floor(s/60))+':'+pad(s%60))};
+const todayKey=()=>new Date().toISOString().slice(0,10);
+const DAYS=['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنج‌شنبه','جمعه'];
+const pDay=d=>(d.getDay()+1)%7;
+const faDate=d=>{try{return new Intl.DateTimeFormat('fa-IR',{day:'numeric',month:'long'}).format(d)}catch(e){return d.toLocaleDateString()}};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const vibe=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
+
+/* ==========================================================================
+   ۱) ذخیره‌سازی  (localStorage + IndexedDB برای عکس/ویدیو/صدا)
+   ========================================================================== */
+const KEY='gymbuddy_v1';
+const DEFAULT={
+  user:{name:'',goal:'حجم',startDate:todayKey(),onboarded:false},
+  exercises:[], plans:[], schedule:{}, sessions:[], photos:[], notes:[],
+  progress:{days:0,streak:0,longest:0,last:null,xp:0,level:1,badges:[]},
+  presets:[], sounds:[], quotesCustom:[],
+  settings:{
+    theme:'neon', anim:true, particles:true,
+    coach:{name:'رفیق',persona:'friendly',voice:true,hidden:false,pos:null,chatty:'normal'},
+    timer:{defaultRest:90,autoRest:true,beepFrom:3,wake:true,fullscreen:false},
+    bind:{} // event -> soundId
+  }
+};
+let S=load();
+function load(){
+  try{const r=JSON.parse(localStorage.getItem(KEY));if(r)return deepMerge(structuredClone(DEFAULT),r)}catch(e){}
+  return structuredClone(DEFAULT);
+}
+function deepMerge(a,b){for(const k in b){if(b[k]&&typeof b[k]==='object'&&!Array.isArray(b[k])&&a[k])deepMerge(a[k],b[k]);else a[k]=b[k]}return a}
+let saveT;
+function save(){clearTimeout(saveT);saveT=setTimeout(()=>localStorage.setItem(KEY,JSON.stringify(S)),120)}
+
+/* --- IndexedDB برای فایل‌ها --- */
+let IDB=null;
+function idbOpen(){return new Promise(res=>{
+  const r=indexedDB.open('gymbuddy',1);
+  r.onupgradeneeded=e=>{const d=e.target.result;
+    if(!d.objectStoreNames.contains('media'))d.createObjectStore('media',{keyPath:'id'});
+    if(!d.objectStoreNames.contains('sounds'))d.createObjectStore('sounds',{keyPath:'id'});};
+  r.onsuccess=e=>{IDB=e.target.result;res(IDB)};
+  r.onerror=()=>res(null);
+})}
+function idbPut(st,o){return new Promise(res=>{if(!IDB)return res();const t=IDB.transaction(st,'readwrite');t.objectStore(st).put(o);t.oncomplete=()=>res(o)})}
+function idbGet(st,id){return new Promise(res=>{if(!IDB)return res(null);const q=IDB.transaction(st).objectStore(st).get(id);q.onsuccess=()=>res(q.result||null);q.onerror=()=>res(null)})}
+function idbDel(st,id){return new Promise(res=>{if(!IDB)return res();const t=IDB.transaction(st,'readwrite');t.objectStore(st).delete(id);t.oncomplete=res})}
+const urlCache={};
+async function mediaURL(id){
+  if(!id)return null;
+  if(urlCache[id])return urlCache[id];
+  const m=await idbGet('media',id); if(!m)return null;
+  return urlCache[id]=URL.createObjectURL(m.blob);
+}
+/* فشرده‌سازی عکس */
+function compress(file,max=1280,q=.78){return new Promise(res=>{
+  if(!file.type.startsWith('image/'))return res(file);
+  const img=new Image(),fr=new FileReader();
+  fr.onload=()=>{img.onload=()=>{
+    let{width:w,height:h}=img; const r=Math.min(1,max/Math.max(w,h)); w*=r;h*=r;
+    const c=document.createElement('canvas');c.width=w;c.height=h;
+    c.getContext('2d').drawImage(img,0,0,w,h);
+    c.toBlob(b=>res(b||file),'image/jpeg',q);
+  };img.src=fr.result};
+  fr.readAsDataURL(file);
+})}
+async function addMedia(file){
+  const blob=await compress(file);
+  const o={id:uid(),type:file.type.startsWith('video')?'video':'image',name:file.name,mime:blob.type||file.type,size:blob.size,blob,createdAt:Date.now()};
+  await idbPut('media',o); return o.id;
+}
+
+/* ==========================================================================
+   ۲) دیتای اولیه
+   ========================================================================== */
+const SEED_EX=[
+ ['پرس سینه هالتر','سینه','هالتر',4,8,90],['قفسه سینه دمبل','سینه','دمبل',3,12,60],
+ ['زیربغل سیم‌کش','پشت','دستگاه',4,10,90],['بارفیکس','پشت','وزن بدن',4,8,90],
+ ['اسکات هالتر','پا','هالتر',4,8,120],['ددلیفت','پا','هالتر',4,5,150],
+ ['پرس سرشانه دمبل','سرشانه','دمبل',4,10,75],['نشر از جانب','سرشانه','دمبل',3,15,45],
+ ['جلو بازو هالتر','بازو','هالتر',3,12,60],['پشت بازو سیم‌کش','بازو','دستگاه',3,12,60],
+ ['کرانچ شکم','شکم','وزن بدن',3,20,45],['پلانک','شکم','وزن بدن',3,45,45],
+];
+const QUOTES=[
+ 'تنها تمرینی که پشیمونت می‌کنه، تمرینیه که انجام ندادی.',
+ 'بدنت می‌تونه تقریباً هر کاری بکنه؛ این ذهنته که باید قانعش کنی. 🧠',
+ 'قهرمان‌ها تو باشگاه ساخته می‌شن، نه روی سکو. 🏆',
+ 'درد امروز، قدرت فرداست. 💪',
+ 'هیچ‌وقت برای شروع دیر نیست، ولی همیشه برای بهونه زوده.',
+ 'یک درصد بهتر از دیروز؛ همین کافیه. 📈',
+ 'سخت‌ترین وزنه‌ای که بلند می‌کنی، درِ باشگاهه. 🚪',
+ 'انضباط چیزیه که وقتی انگیزه نیست، کار می‌کنه.',
+ 'عضله با راحتی ساخته نمی‌شه، با مقاومت ساخته می‌شه.',
+ 'امروزِ تو، هدیه‌ی فردای توئه. 🎁',
+ 'هر ستی که می‌زنی، یه رأی به نسخه‌ی بهترِ خودته. 🗳️',
+ 'آروم برو، ولی هرگز نایست. 🐢🔥',
+ 'بدن ضعیف، ذهن رو محدود می‌کنه. آزادش کن.',
+ 'عرق امروز = افتخار فردا. 💦',
+ 'نتیجه نمی‌خواد؛ تداوم می‌خواد. ♾️',
+ 'تو با آخرین تکرارت تعریف می‌شی، نه با اولیش.',
+ 'بهترین پروژه‌ای که روش کار می‌کنی، خودتی. 🚀',
+ 'بهانه‌ها کالری نمی‌سوزونن! 😤',
+ 'قوی‌تر از دیروز، ضعیف‌تر از فردا.',
+ 'شکست فقط وقتیه که دست بکشی. ✊'
+];
+function seed(){
+  if(!S.exercises.length){
+    S.exercises=SEED_EX.map(([n,m,e,s,r,rest])=>({
+      id:uid(),name:n,muscle:m,equip:e,measure:r>30&&n==='پلانک'?'time':'weight_reps',
+      def:{sets:s,reps:r,rest},desc:'',tip:'',media:[],cover:null,fav:false,uses:0,created:Date.now()
+    }));
+  }
+  if(!Object.keys(S.schedule).length)
+    for(let i=0;i<7;i++)S.schedule[i]={status:i===5||i===6?'rest':'train',planId:null,time:'18:00',note:''};
+  if(!S.presets.length)
+    S.presets=[
+      {id:uid(),name:'استراحت کوتاه',sec:60,icon:'⚡'},
+      {id:uid(),name:'استراحت متوسط',sec:90,icon:'💧'},
+      {id:uid(),name:'استراحت سنگین',sec:180,icon:'🏋️'},
+      {id:uid(),name:'تاباتا',sec:20,type:'interval',work:20,rest:10,rounds:8,icon:'🔥'},
+    ];
+  save();
+}
+
+/* ==========================================================================
+   ۳) صدا  (Web Audio + آپلود زنگ دلخواه + صدای مربی)
+   ========================================================================== */
+const Snd={
+  ctx:null, urls:{}, unlocked:false,
+  init(){ if(!this.ctx){try{this.ctx=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}} },
+  unlock(){ this.init(); if(this.ctx&&this.ctx.state==='suspended')this.ctx.resume(); this.unlocked=true; },
+  beep(f=880,d=.16,type='sine',vol=.33){
+    this.init(); if(!this.ctx)return;
+    const o=this.ctx.createOscillator(),g=this.ctx.createGain();
+    o.type=type;o.frequency.value=f;g.gain.value=vol;
+    o.connect(g);g.connect(this.ctx.destination);
+    const t=this.ctx.currentTime;
+    g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+d);
+    o.start(t);o.stop(t+d+.02);
+  },
+  chord(list,gap=.12){list.forEach((f,i)=>setTimeout(()=>this.beep(f,.2,'triangle',.3),i*gap*1000))},
+  async playId(id,vol=1){
+    if(!id)return false;
+    if(!this.urls[id]){const s=await idbGet('sounds',id);if(!s)return false;this.urls[id]=URL.createObjectURL(s.blob)}
+    const a=new Audio(this.urls[id]);a.volume=vol;a.play().catch(()=>{});
+    Snd._last=a; return true;
+  },
+  stopAll(){ if(Snd._last){try{Snd._last.pause()}catch(e){}} },
+  async fire(ev){
+    const id=S.settings.bind[ev];
+    if(id&&await this.playId(id))return;
+    switch(ev){
+      case 'timer_end': this.chord([880,1100,1320]); vibe([160,70,160,70,260]); break;
+      case 'countdown': this.beep(700,.1,'square',.3); vibe(45); break;
+      case 'set_done':  this.chord([660,990],.09); vibe(70); break;
+      case 'start':     this.beep(520,.12,'triangle'); vibe(40); break;
+      case 'pr':        this.chord([660,880,1100,1320,1600],.1); vibe([90,60,90,60,200]); break;
+      case 'finish':    this.chord([523,659,784,1046],.14); vibe([120,80,120,80,300]); break;
+      case 'warn':      this.beep(300,.22,'sawtooth',.26); vibe([60,50,60]); break;
+      default: this.beep(600,.1);
+    }
+  },
+  speak(txt){
+    if(!S.settings.coach.voice||!('speechSynthesis'in window))return;
+    try{
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(txt.replace(/[\u{1F300}-\u{1FAFF}\u2600-\u27BF]/gu,''));
+      u.lang='fa-IR';u.rate=1.02;u.pitch=1.05;speechSynthesis.speak(u);
+    }catch(e){}
+  }
+};
+document.addEventListener('pointerdown',()=>Snd.unlock(),{once:true});
+
+/* ==========================================================================
+   ۴) پیشرفت / روزشمار / Streak
+   ========================================================================== */
+const Prog={
+  record(){
+    const t=todayKey(), p=S.progress;
+    if(p.last===t)return false;
+    const y=new Date(Date.now()-864e5).toISOString().slice(0,10);
+    p.streak = (p.last===y)? p.streak+1 : 1;
+    p.longest=Math.max(p.longest,p.streak);
+    p.last=t; p.days++; p.xp+=60; p.level=Math.floor(p.xp/400)+1;
+    this.badges(); save(); return true;
+  },
+  badges(){
+    const B=[[1,'اولین قدم','🌱'],[7,'یک هفته','🔥'],[30,'یک ماه','🦾'],[50,'نیم‌قرن!','🏅'],[100,'صدتایی','👑'],[200,'افسانه','🐉']];
+    B.forEach(([n,t,i])=>{ if(S.progress.days>=n&&!S.progress.badges.find(b=>b.n===n)) S.progress.badges.push({n,t,i,at:Date.now()}) });
+  },
+  checkStreak(){
+    const p=S.progress; if(!p.last)return;
+    const diff=Math.floor((new Date(todayKey())-new Date(p.last))/864e5);
+    if(diff>1)p.streak=0;
+  },
+  next(){ const M=[7,14,30,50,75,100,150,200,365]; return M.find(m=>m>S.progress.days)||S.progress.days+50 }
+};
+
+/* ==========================================================================
+   ۵) مربی هوشمند (Coach Buddy)
+   ========================================================================== */
+const MSG={
+ friendly:{
+  open:['سلام رفیق! 👋 آماده‌ی ترکوندنی؟','به‌به! بالاخره اومدی 😄 بزن بریم','سلام قهرمان! امروزم می‌ترکونیم 💪'],
+  start:['شروع شد! تمرکز کن و فرم رو حفظ کن 🎯','بزن بریم! من کنارتم 🤝','گرم کردی؟ بریم که ترکوندیم 🔥'],
+  set:['ایول! یه ست دیگه رفت ✅','عالی بود! نفس بگیر 💨','دمت گرم، ادامه بده 💥','آفرین! داری خوب پیش می‌ری 👏'],
+  rest:['استراحت کن، نفس عمیق بکش 😮‍💨','آب بخور و آماده شو 💧'],
+  restEnd:['وقتشه! پاشو ست بعدی 🚀','استراحت تمومه، بزن بریم ⏰'],
+  longRest:['رفیق! خیلی داری استراحت می‌کنی ها 👀','۵ دقیقه شد! پاشو دیگه 😅'],
+  pr:['رکورد جدید!!! 🏆 تو یه هیولایی','واااو! بهترین رکوردت 🔥🔥'],
+  finish:['تمرین تموم شد! بهت افتخار می‌کنم 🎉','کارت عالی بود! حالا ریکاوری 🛌'],
+  idle:['هنوز اینجایی؟ 💤','بریم ادامه دیگه 😊'],
+  water:['آب بخور رفیق، بدنت لازم داره 💧'],
+  miss:['دیروز نیومدی... امروز جبران کنیم؟ 🙂','دلم برات تنگ شده بود! بریم 💪'],
+  rest_day:['امروز روز استراحته، ریکاوری هم بخشی از تمرینه 🛌'],
+ },
+ tough:{
+  open:['پاشو! وقت بهونه نیست 😤','اومدی؟ خوبه. حالا کار کن.','بدون حرف، فقط عمل 🔨'],
+  start:['تمرکز! هیچ ستی رو هدر نده 🎯','ضعف ممنوع. شروع کن.'],
+  set:['کافی نبود، بیشتر فشار بیار 😠','خوبه. بعدی.','قبول! ولی می‌تونی بهتر 💢'],
+  rest:['۹۰ ثانیه. نه بیشتر.'],
+  restEnd:['تموم شد! پاشو ⚡','دیگه بسه، برو سراغ وزنه 🔥'],
+  longRest:['اینجا باشگاهه نه کافه! ☕❌','داری استراحت می‌کنی یا خواب؟ 😡'],
+  pr:['حالا شد! این یعنی تلاش 🏆'],
+  finish:['کارت تموم شد. فردا سخت‌تر 💀'],
+  idle:['تکون بخور! ⏱️'],
+  water:['آب. الان. 💧'],
+  miss:['دیروز فرار کردی. امروز نه. 🚫'],
+  rest_day:['استراحت کن ولی خوش‌خیال نشو 😏'],
+ },
+ funny:{
+  open:['اوه اوه! هالک برگشت 😂💪','سلام! وزنه‌ها دلشون برات تنگ شده بود 🏋️'],
+  start:['موتور روشن شد! برووووم 🏎️'],
+  set:['بوووم! یکی رفت تو برجک 💥','ایول! عضله‌هات دارن جشن می‌گیرن 🎊','آفرین! آینه الان بهت افتخار می‌کنه 😎'],
+  rest:['نفس بگیر پهلوون، قهوه نخوری ها ☕😅'],
+  restEnd:['پاشو! وزنه‌ها دارن نگاهت می‌کنن 👀'],
+  longRest:['داری فیلم می‌بینی؟ 🎬 پاشو دیگه!'],
+  pr:['رکورد شکست! زنگ بزنم گینس؟ 📞🏆'],
+  finish:['تموم! برو یه چیزی بخور، حقته 🍗'],
+  idle:['الو؟ کسی اونجا هست؟ 📢'],
+  water:['آب! نه نوشابه 😂💧'],
+  miss:['دیروز کجا بودی؟ وزنه‌ها گریه کردن 😢'],
+  rest_day:['امروز تعطیله! برو عضله بساز رو کاناپه 🛋️'],
+ },
+ pro:{
+  open:['سلام. برنامه‌ی امروز آماده‌ست.','خوش آمدی. بیا شروع کنیم.'],
+  start:['گرم‌کردن کامل، سپس ست‌های اصلی.'],
+  set:['ست ثبت شد. تمپو رو حفظ کن.','خوب بود. RPE رو کنترل کن.'],
+  rest:['استراحت بین‌ست شروع شد.'],
+  restEnd:['استراحت پایان یافت. ست بعدی.'],
+  longRest:['استراحت بیش از حد، افت عملکرد دارد.'],
+  pr:['رکورد شخصی جدید ثبت شد. 📈'],
+  finish:['جلسه تکمیل شد. ریکاوری و پروتئین.'],
+  idle:['جلسه متوقف است.'],
+  water:['هیدراتاسیون را فراموش نکن.'],
+  miss:['یک جلسه از دست رفت. برنامه را تنظیم کن.'],
+  rest_day:['امروز ریکاوری فعال توصیه می‌شود.'],
+ },
+ calm:{
+  open:['سلام 🌿 نفس بکش، امروز مال توئه.'],
+  start:['آروم شروع کن، به بدنت گوش بده 🧘'],
+  set:['خوب بود. آگاهانه نفس بکش 🌬️','قدم به قدم، همین کافیه ✨'],
+  rest:['چشماتو ببند و نفس عمیق 🌊'],
+  restEnd:['آماده‌ای؟ با آرامش ادامه بده.'],
+  longRest:['کمی طولانی شد، بریم ادامه 🌱'],
+  pr:['پیشرفت زیبایی بود ✨'],
+  finish:['عالی بود. حالا استراحت کن 🌙'],
+  idle:['هر وقت آماده بودی ادامه بده.'],
+  water:['کمی آب بنوش 💧'],
+  miss:['اشکالی نداره، امروز دوباره شروع می‌کنیم 🌅'],
+  rest_day:['امروز بدن داره خودشو می‌سازه 🌿'],
+ }
+};
+const Coach={
+  el:null,btn:null,face:null,badge:null,bub:null,
+  last:0, idleT:0, restStart:0, hideT:null, dragging:false,
+  init(){
+    this.el=$('#buddy');this.btn=$('#buddyBtn');this.face=$('#buddyFace');this.badge=$('#buddyBadge');this.bub=$('#bubble');
+    const p=S.settings.coach.pos||{x:innerWidth-84,y:innerHeight-190};
+    this.move(p.x,p.y);
+    this.anim('idle');
+    if(S.settings.coach.hidden)this.el.style.display='none';
+    /* drag */
+    let sx,sy,ox,oy,moved=false,t0=0;
+    const down=e=>{const pt=e.touches?e.touches[0]:e;sx=pt.clientX;sy=pt.clientY;
+      ox=parseFloat(this.el.style.left);oy=parseFloat(this.el.style.top);moved=false;t0=Date.now();
+      this.dragging=true;this.btn.style.cursor='grabbing';
+      document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up)};
+    const mv=e=>{const pt=e;const dx=pt.clientX-sx,dy=pt.clientY-sy;
+      if(Math.abs(dx)+Math.abs(dy)>8)moved=true;
+      this.move(ox+dx,oy+dy)};
+    const up=()=>{document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);
+      this.btn.style.cursor='grab';this.dragging=false;
+      const w=this.el.offsetWidth,x=parseFloat(this.el.style.left),y=parseFloat(this.el.style.top);
+      const snapX=(x+w/2<innerWidth/2)?12:innerWidth-w-12;
+      this.el.style.transition='left .25s cubic-bezier(.2,1.4,.4,1),top .25s';
+      this.move(snapX,y); setTimeout(()=>this.el.style.transition='',260);
+      S.settings.coach.pos={x:snapX,y};save();
+      if(!moved&&Date.now()-t0<400)this.tap();};
+    this.btn.addEventListener('pointerdown',down);
+    /* ناظر وضعیت */
+    setInterval(()=>this.watch(),5000);
+    document.addEventListener('scroll',()=>{this.el.classList.add('mini');clearTimeout(this.hideT);
+      this.hideT=setTimeout(()=>this.el.classList.remove('mini'),900)},{passive:true});
+  },
+  move(x,y){
+    const w=this.el.offsetWidth||66,h=this.el.offsetHeight||66;
+    x=Math.min(Math.max(6,x),innerWidth-w-6); y=Math.min(Math.max(70,y),innerHeight-h-80);
+    this.el.style.left=x+'px';this.el.style.top=y+'px';
+    const left=x<innerWidth/2;
+    this.bub.style.top=(y-10)+'px';
+    if(left){this.bub.style.left=(x+w+8)+'px';this.bub.style.right='auto'}
+    else{this.bub.style.right=(innerWidth-x+8)+'px';this.bub.style.left='auto'}
+  },
+  anim(a,badge=''){
+    this.btn.className='a-'+a;
+    const F={idle:'🏋️‍♂️',lift:'🏋️‍♂️',cheer:'🤩',warn:'😤',sleep:'😴'};
+    this.face.textContent=F[a]||'🏋️‍♂️'; this.badge.textContent=badge;
+  },
+  say(text,{anim='idle',badge='',dur=4800,sound=null,voice=true}={}){
+    if(S.settings.coach.hidden)return;
+    this.last=Date.now();
+    this.bub.innerHTML=text;
+    this.bub.classList.add('show');
+    this.anim(anim,badge);
+    if(sound)Snd.fire(sound);
+    if(voice&&S.settings.coach.voice)Snd.speak(text);
+    clearTimeout(this._t);
+    this._t=setTimeout(()=>{this.bub.classList.remove('show');this.anim('idle')},dur);
+  },
+  pick(k){
+    const p=S.settings.coach.persona;
+    const bank=(MSG[p]&&MSG[p][k])||MSG.friendly[k]||['...'];
+    return bank[Math.floor(Math.random()*bank.length)];
+  },
+  emit(ev,data={}){
+    const chat=S.settings.coach.chatty;
+    const cool={set:3000,idle:60000,water:1,open:1,restEnd:1,pr:1,finish:1,longRest:45000}[ev]??12000;
+    if(Date.now()-this.last<cool && !['pr','finish','restEnd','open'].includes(ev))return;
+    if(chat==='minimal'&&['set','idle','water','rest'].includes(ev))return;
+    const M={
+      open:   ()=>this.say(this.pick('open'),{anim:'cheer',badge:'👋',dur:5200}),
+      start:  ()=>this.say(this.pick('start'),{anim:'lift',badge:'🔥',sound:'start'}),
+      set:    ()=>this.say(this.pick('set')+(data.left?` <b class="text-pri">${fa(data.left)}</b> ست مونده`:''),{anim:'cheer',badge:'✅',sound:'set_done',dur:3200}),
+      rest:   ()=>this.say(this.pick('rest')+` ⏱️ ${fa(data.sec||90)} ثانیه`,{anim:'idle',badge:'😮‍💨',dur:3500,voice:false}),
+      restEnd:()=>this.say(this.pick('restEnd'),{anim:'warn',badge:'⏰',sound:'timer_end',dur:5000}),
+      longRest:()=>this.say(this.pick('longRest'),{anim:'warn',badge:'⚠️',sound:'warn'}),
+      pr:     ()=>{this.say(this.pick('pr')+` <b class="text-acc">${fa(data.w||'')}kg</b>`,{anim:'cheer',badge:'🏆',sound:'pr',dur:6000});confetti()},
+      finish: ()=>{this.say(this.pick('finish'),{anim:'cheer',badge:'🎉',sound:'finish',dur:6500});confetti(90)},
+      idle:   ()=>this.say(this.pick('idle'),{anim:'sleep',badge:'💤',dur:3200,voice:false}),
+      water:  ()=>this.say(this.pick('water'),{anim:'idle',badge:'💧',dur:4000}),
+      miss:   ()=>this.say(this.pick('miss'),{anim:'warn',badge:'😔',dur:5200}),
+      rest_day:()=>this.say(this.pick('rest_day'),{anim:'sleep',badge:'🛌',dur:5000}),
+    };
+    (M[ev]||(()=>{}))();
+  },
+  tap(){
+    if(Timer.running)return this.say(`⏱️ <b class="text-pri">${mmss(Timer.remain)}</b> مونده! تمرکز 💪`,{anim:'lift',dur:3000,voice:false});
+    const tips=[
+      `امروز روز <b class="text-pri">${fa(S.progress.days+1)}</b>ام توئه 🔥`,
+      `🔥 <b class="text-acc">${fa(S.progress.streak)}</b> روز پشت‌سرهم! نذار قطع شه`,
+      `💡 ${QUOTES[Math.floor(Math.random()*QUOTES.length)]}`,
+      `⚡ سطح <b class="text-pri">${fa(S.progress.level)}</b> · ${fa(S.progress.xp)} XP`,
+      `🎯 <b class="text-acc">${fa(Prog.next()-S.progress.days)}</b> روز تا نشان بعدی!`,
+      `💧 یادت نره آب بخوری!`,
+      `😴 خواب کافی = عضله‌سازی بیشتر`,
+    ];
+    this.say(tips[Math.floor(Math.random()*tips.length)],{anim:'cheer',badge:'💬',dur:5200,voice:false});
+  },
+  watch(){
+    if(Timer.running&&Timer.mode==='rest'&&Timer.remain<=0){}
+    if(Live.active){
+      const idleMin=(Date.now()-Live.lastAct)/60000;
+      if(idleMin>5&&idleMin<5.2)this.emit('longRest');
+      if(idleMin>9&&idleMin<9.2)this.emit('idle');
+      if(Live.started&&(Date.now()-Live.started)/60000>25&&!Live._water){Live._water=1;this.emit('water')}
+    }
+  }
+};
+
+/* ==========================================================================
+   ۶) تایمر
+   ========================================================================== */
+const Timer={
+  total:0,remain:0,running:false,endTs:0,tick:null,mode:'countdown',
+  interval:null,round:0,phase:'work',wake:null,onEnd:null,
+  set(sec){this.total=sec;this.remain=sec;this.mode='countdown';this.interval=null;this.render()},
+  startCustom(sec,{label='تایمر',mode='countdown',onEnd=null}={}){
+    this.label=label;this.mode=mode;this.onEnd=onEnd;this.set(sec);this.start();
+  },
+  startInterval(cfg){
+    this.interval=cfg;this.round=1;this.phase='work';this.mode='interval';
+    this.total=cfg.work;this.remain=cfg.work;this.start();
+  },
+  start(){
+    if(this.remain<=0)return;
+    Snd.unlock();
+    this.running=true;this.endTs=Date.now()+this.remain*1000;
+    clearInterval(this.tick);
+    this._last=Math.ceil(this.remain);
+    this.tick=setInterval(()=>this._t(),120);
+    this.lock(); Snd.fire('start'); this.render();
+  },
+  pause(){this.running=false;clearInterval(this.tick);this.remain=Math.max(0,(this.endTs-Date.now())/1000);this.unlock();this.render()},
+  toggle(){this.running?this.pause():this.start()},
+  reset(){this.running=false;clearInterval(this.tick);this.remain=this.total;this.unlock();this.render()},
+  add(s){this.remain=Math.max(0,this.remain+s);this.total=Math.max(this.total,this.remain);if(this.running)this.endTs=Date.now()+this.remain*1000;this.render()},
+  _t(){
+    this.remain=Math.max(0,(this.endTs-Date.now())/1000);
+    const c=Math.ceil(this.remain);
+    if(c!==this._last){
+      this._last=c;
+      if(c<=S.settings.timer.beepFrom&&c>0)Snd.fire('countdown');
+    }
+    if(this.remain<=0)this.done();
+    this.render();
+  },
+  done(){
+    clearInterval(this.tick);this.running=false;this.unlock();
+    if(this.mode==='interval'&&this.interval){
+      const cfg=this.interval;
+      if(this.phase==='work'){ this.phase='rest';this.total=cfg.rest;this.remain=cfg.rest;Snd.fire('timer_end');
+        Coach.say(`استراحت! دور <b>${fa(this.round)}</b> از ${fa(cfg.rounds)} 😮‍💨`,{anim:'idle',badge:'💨',dur:2600,voice:false});
+        this.start();return;
+      } else {
+        this.round++;
+        if(this.round>cfg.rounds){ this.interval=null;this.mode='countdown';Snd.fire('finish');
+          Coach.say('اینتروال تموم شد! دمت گرم 🔥',{anim:'cheer',badge:'🏁',dur:5000});confetti(50);this.render();return; }
+        this.phase='work';this.total=cfg.work;this.remain=cfg.work;Snd.fire('start');
+        Coach.say(`دور <b class="text-pri">${fa(this.round)}</b>! بزن بریم 🚀`,{anim:'lift',badge:'🔥',dur:2400,voice:false});
+        this.start();return;
+      }
+    }
+    Snd.fire('timer_end');
+    Coach.emit('restEnd');
+    document.body.classList.add('flash');setTimeout(()=>document.body.classList.remove('flash'),1600);
+    if(this.onEnd){const f=this.onEnd;this.onEnd=null;f()}
+    this.render();
+  },
+  async lock(){ if(!S.settings.timer.wake)return; try{this.wake=await navigator.wakeLock.request('screen')}catch(e){} },
+  unlock(){ try{this.wake&&this.wake.release();this.wake=null}catch(e){} },
+  render(){
+    const pct=this.total?(this.remain/this.total):0;
+    const mn=$('#mini');
+    if((this.running||this.remain>0&&this.remain<this.total)&&VIEW!=='timer'){mn.classList.add('on');
+      $('#miniTxt').textContent=mmss(this.remain);$('#miniBar').style.width=(pct*100)+'%';
+      $('#miniBtn').textContent=this.running?'⏸':'▶';
+    } else mn.classList.remove('on');
+    if(VIEW==='timer')renderTimerFace();
+  }
+};
+
+/* ==========================================================================
+   ۷) جلسه‌ی زنده
+   ========================================================================== */
+const Live={
+  active:false,plan:null,log:[],started:0,lastAct:0,_water:0,
+  start(planId){
+    const p=S.plans.find(x=>x.id===planId); if(!p)return toast('برنامه پیدا نشد');
+    this.active=true;this.plan=structuredClone(p);this.log=[];this.started=Date.now();this.lastAct=Date.now();this._water=0;
+    Coach.emit('start'); go('session');
+  },
+  totalSets(){return this.plan.ex.reduce((a,e)=>a+e.sets.length,0)},
+  doneSets(){return this.log.filter(l=>l.done).length},
+  volume(){return this.log.filter(l=>l.done).reduce((a,l)=>a+(+l.w||0)*(+l.r||0),0)},
+  toggleSet(ei,si,reps,w){
+    const ex=this.plan.ex[ei],st=ex.sets[si];
+    const key=ei+'_'+si;
+    let l=this.log.find(x=>x.k===key);
+    if(!l){l={k:key,exId:ex.exId,name:ex.name,set:si+1,r:reps,w:w,done:false};this.log.push(l)}
+    l.r=reps;l.w=w;l.done=!l.done;this.lastAct=Date.now();
+    if(l.done){
+      const left=this.totalSets()-this.doneSets();
+      Coach.emit('set',{left});
+      /* بررسی رکورد */
+      const pr=bestOf(ex.exId);
+      if(+w>0&&+w>pr){ Coach.emit('pr',{w}); }
+      if(S.settings.timer.autoRest&&left>0){
+        const rest=st.rest||ex.rest||S.settings.timer.defaultRest;
+        Timer.startCustom(rest,{label:'استراحت'});
+        setTimeout(()=>Coach.emit('rest',{sec:rest}),900);
+      }
+    }
+    save();renderSession();
+  },
+  addSet(ei){
+    const ex=this.plan.ex[ei];const last=ex.sets[ex.sets.length-1]||{reps:10,w:0,rest:90};
+    ex.sets.push({...structuredClone(last),type:'normal',extra:true});
+    this.lastAct=Date.now();renderSession();
+  },
+  finish(){
+    const dur=Math.round((Date.now()-this.started)/60000);
+    const done=this.log.filter(l=>l.done);
+    if(!done.length){ if(!confirm('هیچ ستی ثبت نشده. لغو بشه؟'))return; this.active=false;return go('home'); }
+    const ses={id:uid(),date:todayKey(),ts:Date.now(),planId:this.plan.id,title:this.plan.title,
+      dur,sets:done.length,volume:this.volume(),log:done};
+    S.sessions.unshift(ses);
+    const isNew=Prog.record();
+    this.active=false;save();
+    Coach.emit('finish');
+    openSheet(`
+      <div class="text-center py-3">
+        <div class="text-6xl mb-2">🎉</div>
+        <h2 class="text-2xl font-black grad-t">تمرین تموم شد!</h2>
+        <p class="text-mut text-sm mt-1">${esc(this.plan.title)}</p>
+        <div class="grid grid-cols-3 gap-2 mt-5">
+          ${stat('⏱️',fa(dur)+' دقیقه','زمان')}
+          ${stat('✅',fa(done.length),'ست')}
+          ${stat('🏋️',fa(Math.round(this.volume())),'کیلو حجم')}
+        </div>
+        <div class="card p-3 mt-3 text-sm">
+          ${isNew?`🔥 روز <b class="text-pri">${fa(S.progress.days)}</b>ام · استریک <b class="text-acc">${fa(S.progress.streak)}</b> روز`:'امروز قبلاً ثبت شده بود'}
+          <div class="mt-1 text-mut text-xs">+۶۰ XP · سطح ${fa(S.progress.level)}</div>
+        </div>
+        <button onclick="closeSheet();go('home')" class="btn btn-p w-full py-3 mt-4">عالیه! 💪</button>
+      </div>`);
+  }
+};
+function bestOf(exId){
+  let m=0;S.sessions.forEach(s=>s.log.forEach(l=>{if(l.exId===exId)m=Math.max(m,+l.w||0)}));return m;
+}
+function lastPerf(exId){
+  for(const s of S.sessions){const l=s.log.filter(x=>x.exId===exId);if(l.length)return`${fa(l.length)}×${fa(l[0].r)} @ ${fa(l[0].w)}`}
+  return null;
+}
+
+/* ==========================================================================
+   ۸) ابزار UI
+   ========================================================================== */
+function toast(msg,icon='ℹ️'){
+  const d=document.createElement('div');
+  d.className='fixed left-1/2 -translate-x-1/2 bottom-28 z-[90] card px-4 py-2.5 text-sm font-bold glow-sm pop';
+  d.innerHTML=icon+' '+msg;document.body.appendChild(d);
+  setTimeout(()=>{d.style.opacity=0;d.style.transition='.3s';setTimeout(()=>d.remove(),320)},2200);
+}
+function confetti(n=60){
+  const C=['#00D4FF','#7C3AED','#FF6B35','#39FF14','#F59E0B','#EF4444','#A78BFA'];
+  for(let i=0;i<n;i++){const e=document.createElement('div');e.className='confetti';
+    e.style.left=Math.random()*100+'vw';e.style.background=C[i%C.length];
+    e.style.animationDelay=Math.random()*.6+'s';e.style.animationDuration=(1.8+Math.random()*1.4)+'s';
+    document.body.appendChild(e);setTimeout(()=>e.remove(),3600)}
+}
+function openSheet(html){$('#sheetBody').innerHTML=`<div class="w-12 h-1.5 rounded-full bg-mut/40 mx-auto mb-3"></div>`+html;$('#sheet').classList.add('open')}
+function closeSheet(){$('#sheet').classList.remove('open')}
+const stat=(i,v,l)=>`<div class="card p-3 text-center"><div class="text-xl">${i}</div><div class="font-black text-base mt-1">${v}</div><div class="text-[10px] text-mut">${l}</div></div>`;
+
+function particles(){
+  if(!S.settings.particles)return;
+  for(let i=0;i<14;i++){const p=document.createElement('div');p.className='particle';
+    const s=2+Math.random()*4;p.style.width=p.style.height=s+'px';
+    p.style.left=Math.random()*100+'vw';p.style.animationDuration=(14+Math.random()*16)+'s';
+    p.style.animationDelay=(-Math.random()*20)+'s';document.body.appendChild(p)}
+}
+
+/* ==========================================================================
+   ۹) ROUTER
+   ========================================================================== */
+let VIEW='home',PARAM=null;
+function go(v,p=null){VIEW=v;PARAM=p;location.hash='#/'+v+(p?'/'+p:'');render();window.scrollTo(0,0)}
+function render(){
+  $$('.nv').forEach(b=>b.classList.toggle('on',b.dataset.nav===VIEW));
+  const R={home:renderHome,week:renderWeek,timer:renderTimer,exercises:renderExercises,
+    stats:renderStats,settings:renderSettings,plans:renderPlans,builder:renderBuilder,
+    exform:renderExForm,session:renderSession,photos:renderPhotos,sounds:renderSounds,notes:renderNotes};
+  (R[VIEW]||renderHome)();
+  $('#app').classList.remove('fade-in');void $('#app').offsetWidth;$('#app').classList.add('fade-in');
+  Timer.render();
+}
+addEventListener('hashchange',()=>{const[,v,p]=location.hash.replace('#/','').split('/');});
+
+/* ==========================================================================
+   ۱۰) صفحه‌ی خانه
+   ========================================================================== */
+function greet(){
+  const h=new Date().getHours();
+  if(h<5)return['شب‌بخیر','🌙'];if(h<12)return['صبح بخیر','🌅'];
+  if(h<17)return['ظهر بخیر','☀️'];if(h<21)return['عصر بخیر','🌇'];return['شب بخیر','🌙'];
+}
+function dailyQuote(){
+  const all=[...QUOTES,...S.quotesCustom];
+  const i=Math.floor(Date.now()/864e5)%all.length;return all[i];
+}
+function renderHome(){
+  const[g,gi]=greet(),P=S.progress,d=pDay(new Date());
+  const sch=S.schedule[d]||{},plan=S.plans.find(p=>p.id===sch.planId);
+  const wk=last7();
+  $('#app').innerHTML=`
+  <!-- Hero -->
+  <div class="card p-5 glow relative overflow-hidden">
+    <div class="absolute -top-10 -left-10 w-40 h-40 rounded-full grad opacity-20 blur-2xl"></div>
+    <div class="relative">
+      <div class="text-mut text-xs">${gi} ${g}</div>
+      <h1 class="text-2xl font-black mt-1">${esc(S.user.name||'قهرمان')} <span class="inline-block" style="animation:bIdle 2s infinite">👋</span></h1>
+      <div class="flex flex-wrap items-center gap-2 mt-3">
+        <div class="chip">💪 روز <b>${fa(P.days+1)}</b>اُم</div>
+        <div class="chip">🔥 ${fa(P.streak)} روز پشت‌سرهم</div>
+        <div class="chip">⭐ سطح ${fa(P.level)}</div>
+      </div>
+      <div class="mt-3">
+        <div class="flex justify-between text-[10px] text-mut mb-1"><span>XP تا سطح بعد</span><span>${fa(P.xp%400)}/۴۰۰</span></div>
+        <div class="bar"><i style="width:${(P.xp%400)/4}%"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quote -->
+  <div class="card p-4 mt-3 border-r-4" style="border-right-color:rgb(var(--c-pri))">
+    <div class="text-[13px] leading-7">💬 ${esc(dailyQuote())}</div>
+  </div>
+
+  <!-- Today -->
+  <div class="card p-4 mt-3">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="font-black">📋 امروز · ${DAYS[d]}</h2>
+      <span class="text-[11px] text-mut">${faDate(new Date())}</span>
+    </div>
+    ${sch.status==='rest'?`
+      <div class="text-center py-5">
+        <div class="text-5xl mb-2">🛌</div>
+        <div class="font-bold">روز استراحت</div>
+        <div class="text-xs text-mut mt-1">ریکاوری هم بخشی از تمرینه</div>
+        <button onclick="go('week')" class="btn btn-g px-4 py-2 mt-3 text-sm">تغییر برنامه هفته</button>
+      </div>`
+    : plan?`
+      <div class="rounded-2xl p-4" style="background:linear-gradient(135deg,rgb(var(--c-pri)/.16),rgb(var(--c-sec)/.16))">
+        <div class="font-black text-lg">${esc(plan.title)}</div>
+        <div class="text-xs text-mut mt-1">${fa(plan.ex.length)} حرکت · ${fa(plan.ex.reduce((a,e)=>a+e.sets.length,0))} ست · ~${fa(estMin(plan))} دقیقه</div>
+        <div class="flex gap-1 flex-wrap mt-2">${plan.ex.slice(0,4).map(e=>`<span class="text-[10px] px-2 py-1 rounded-lg bg-surf2">${esc(e.name)}</span>`).join('')}${plan.ex.length>4?`<span class="text-[10px] px-2 py-1 text-mut">+${fa(plan.ex.length-4)}</span>`:''}</div>
+      </div>
+      <button onclick="Live.start('${plan.id}')" class="btn btn-p w-full py-3.5 mt-3 text-base">▶️ شروع تمرین</button>`
+    :`<div class="text-center py-5">
+        <div class="text-4xl mb-2">🤔</div>
+        <div class="text-sm text-mut">برای امروز برنامه‌ای تنظیم نشده</div>
+        <button onclick="go('plans')" class="btn btn-p px-5 py-2.5 mt-3 text-sm">+ ساخت برنامه</button>
+      </div>`}
+  </div>
+
+  <!-- Week rings -->
+  <div class="card p-4 mt-3">
+    <div class="flex items-center justify-between mb-3"><h2 class="font-black text-sm">📈 ۷ روز اخیر</h2>
+      <span class="text-[11px] text-mut">${fa(wk.filter(x=>x.has).length)} جلسه</span></div>
+    <div class="flex justify-between">${wk.map(x=>`
+      <div class="text-center flex-1">
+        <div class="mx-auto w-9 h-9 rounded-xl grid place-items-center text-sm font-black ${x.has?'grad text-white glow-sm':'bg-surf2 text-mut'}">${x.has?'✓':fa(x.n)}</div>
+        <div class="text-[9px] text-mut mt-1">${x.d}</div>
+      </div>`).join('')}</div>
+    <div class="mt-3 text-[11px] text-mut text-center">🏆 ${fa(Prog.next()-P.days)} روز تا نشان «${fa(Prog.next())} جلسه»</div>
+  </div>
+
+  <!-- Quick -->
+  <div class="grid grid-cols-4 gap-2 mt-3">
+    ${qa('⏱️','تایمر',"go('timer')")}${qa('🧩','برنامه‌ها',"go('plans')")}
+    ${qa('📸','عکس بدن',"go('photos')")}${qa('📝','یادداشت',"go('notes')")}
+  </div>
+
+  ${P.badges.length?`<div class="card p-4 mt-3">
+    <h2 class="font-black text-sm mb-2">🎖️ نشان‌های من</h2>
+    <div class="flex flex-wrap gap-2">${P.badges.map(b=>`<div class="chip">${b.i} ${esc(b.t)}</div>`).join('')}</div></div>`:''}
+  `;
+  if(!S.user.onboarded)onboarding();
+  else if(!sessionStorage.getItem('greeted')){
+    sessionStorage.setItem('greeted','1');
+    setTimeout(()=>{
+      Prog.checkStreak();
+      const diff=P.last?Math.floor((new Date(todayKey())-new Date(P.last))/864e5):99;
+      if(sch.status==='rest')Coach.emit('rest_day');
+      else if(diff>1&&P.last)Coach.emit('miss');
+      else Coach.say(`${gi} <b>${esc(S.user.name||'قهرمان')}</b>! 👋<br>امروز روز <b class="text-pri">${fa(P.days+1)}</b>اُم تمرینته 🔥<br><span class="text-mut text-xs">${esc(dailyQuote())}</span>`,{anim:'cheer',badge:'👋',dur:7000});
+    },700);
+  }
+}
+const qa=(i,t,fn)=>`<button onclick="${fn}" class="card p-3 text-center active:scale-95 transition"><div class="text-xl">${i}</div><div class="text-[10px] font-bold mt-1">${t}</div></button>`;
+function last7(){
+  const r=[];for(let i=6;i>=0;i--){const d=new Date(Date.now()-i*864e5),k=d.toISOString().slice(0,10);
+    r.push({d:DAYS[pDay(d)].slice(0,3),n:d.getDate(),has:S.sessions.some(s=>s.date===k)})}return r;
+}
+const estMin=p=>Math.round(p.ex.reduce((a,e)=>a+e.sets.length*((e.rest||90)+40)/60,0));
+
+function onboarding(){
+  openSheet(`
+   <div class="text-center">
+     <div class="text-6xl mb-2" style="animation:bIdle 2s infinite">🏋️‍♂️</div>
+     <h2 class="text-xl font-black grad-t">خوش اومدی به جیم‌بادی!</h2>
+     <p class="text-xs text-mut mt-1">مربی شخصی‌ات رو بشناس</p>
+   </div>
+   <div class="space-y-3 mt-5">
+     <div><label class="text-xs text-mut">اسمت چیه؟</label><input id="obName" class="inp mt-1" placeholder="مثلاً علی"></div>
+     <div><label class="text-xs text-mut">هدفت؟</label>
+       <select id="obGoal" class="inp mt-1"><option>حجم</option><option>کات / چربی‌سوزی</option><option>قدرت</option><option>تناسب اندام</option></select></div>
+     <div><label class="text-xs text-mut">اسم مربی‌ات</label><input id="obCoach" class="inp mt-1" value="رفیق"></div>
+     <div><label class="text-xs text-mut">لحن مربی</label>
+       <select id="obPer" class="inp mt-1">
+         <option value="friendly">😊 رفیق صمیمی</option><option value="tough">😤 سخت‌گیر</option>
+         <option value="funny">😂 شوخ</option><option value="pro">🧑‍🔬 حرفه‌ای</option><option value="calm">🧘 آرام</option></select></div>
+     <button onclick="finishOb()" class="btn btn-p w-full py-3">بزن بریم! 🚀</button>
+   </div>`);
+}
+function finishOb(){
+  S.user.name=$('#obName').value.trim()||'قهرمان';
+  S.user.goal=$('#obGoal').value;S.user.onboarded=true;S.user.startDate=todayKey();
+  S.settings.coach.name=$('#obCoach').value.trim()||'رفیق';
+  S.settings.coach.persona=$('#obPer').value;
+  save();closeSheet();render();
+  setTimeout(()=>Coach.say(`سلام <b>${esc(S.user.name)}</b>! من ${esc(S.settings.coach.name)}م 💪<br>از امروز کنارتم. بزن بریم!`,{anim:'cheer',badge:'🎉',dur:6000}),500);
+  confetti(40);
+}
+
+/* ==========================================================================
+   ۱۱) هفته
+   ========================================================================== */
+function renderWeek(){
+  const td=pDay(new Date());
+  $('#app').innerHTML=`
+  <h1 class="text-xl font-black mb-1">📅 برنامه‌ی هفتگی</h1>
+  <p class="text-xs text-mut mb-4">روزهای تمرین و استراحتت رو تنظیم کن</p>
+  <div class="space-y-2">
+  ${DAYS.map((dn,i)=>{const s=S.schedule[i]||{},p=S.plans.find(x=>x.id===s.planId);
+   return`<div class="card p-3 ${i===td?'glow':''}">
+    <div class="flex items-center gap-3">
+      <div class="w-11 h-11 rounded-xl grid place-items-center font-black text-sm ${s.status==='rest'?'bg-surf2 text-mut':'grad text-white'}">${dn.slice(0,3)}</div>
+      <div class="flex-1 min-w-0">
+        <div class="font-bold text-sm flex items-center gap-1">${dn} ${i===td?'<span class="chip !text-[9px] !py-0">امروز</span>':''}</div>
+        <div class="text-[11px] text-mut truncate">${s.status==='rest'?'🛌 استراحت':(p?`🏋️ ${esc(p.title)} · ${fa(p.ex.length)} حرکت`:'⚠️ برنامه انتخاب نشده')}</div>
+      </div>
+      <button onclick="dayEdit(${i})" class="btn btn-g w-9 h-9">✏️</button>
+    </div>
+    ${s.note?`<div class="text-[11px] text-mut mt-2 pt-2 border-t border-white/5">📝 ${esc(s.note)}</div>`:''}
+   </div>`}).join('')}
+  </div>
+  <button onclick="go('plans')" class="btn btn-g w-full py-3 mt-4">🧩 مدیریت برنامه‌ها</button>`;
+}
+function dayEdit(i){
+  const s=S.schedule[i];
+  openSheet(`
+   <h2 class="font-black text-lg mb-4">${DAYS[i]}</h2>
+   <div class="grid grid-cols-3 gap-2">
+     ${['train:🏋️ تمرین','rest:🛌 استراحت','active:🚶 فعال'].map(o=>{const[v,t]=o.split(':');
+       return`<button onclick="setDay(${i},'${v}')" class="btn ${s.status===v?'btn-p':'btn-g'} py-3 text-xs">${t}</button>`}).join('')}
+   </div>
+   <div class="mt-4"><label class="text-xs text-mut">برنامه‌ی تمرینی</label>
+     <select id="dPlan" class="inp mt-1" onchange="S.schedule[${i}].planId=this.value||null;save();renderWeek()">
+       <option value="">— انتخاب کن —</option>
+       ${S.plans.map(p=>`<option value="${p.id}" ${s.planId===p.id?'selected':''}>${esc(p.title)}</option>`).join('')}
+     </select></div>
+   <div class="mt-3"><label class="text-xs text-mut">ساعت</label>
+     <input type="time" class="inp mt-1" value="${s.time||'18:00'}" onchange="S.schedule[${i}].time=this.value;save()"></div>
+   <div class="mt-3"><label class="text-xs text-mut">یادداشت این روز</label>
+     <textarea class="inp mt-1" rows="3" placeholder="مثلاً: گرم‌کردن ۱۰ دقیقه دوچرخه..." onchange="S.schedule[${i}].note=this.value;save();renderWeek()">${esc(s.note||'')}</textarea></div>
+   <button onclick="closeSheet();renderWeek()" class="btn btn-p w-full py-3 mt-4">ذخیره ✅</button>`);
+}
+function setDay(i,v){S.schedule[i].status=v;save();dayEdit(i);renderWeek()}
+
+/* ==========================================================================
+   ۱۲) برنامه‌ها + سازنده
+   ========================================================================== */
+function renderPlans(){
+  $('#app').innerHTML=`
+  <div class="flex items-center justify-between mb-4">
+    <h1 class="text-xl font-black">🧩 برنامه‌های من</h1>
+    <button onclick="newPlan()" class="btn btn-p px-4 py-2 text-sm">+ جدید</button>
+  </div>
+  ${S.plans.length?`<div class="space-y-2">${S.plans.map(p=>`
+    <div class="card p-4">
+      <div class="flex items-start justify-between gap-2">
+        <div class="flex-1 min-w-0" onclick="go('builder','${p.id}')">
+          <div class="font-black">${esc(p.title)}</div>
+          <div class="text-[11px] text-mut mt-1">${fa(p.ex.length)} حرکت · ${fa(p.ex.reduce((a,e)=>a+e.sets.length,0))} ست · ~${fa(estMin(p))}′</div>
+          <div class="flex gap-1 flex-wrap mt-2">${p.ex.slice(0,5).map(e=>`<span class="text-[10px] px-2 py-0.5 rounded-lg bg-surf2">${esc(e.name)}</span>`).join('')}</div>
+        </div>
+        <div class="flex flex-col gap-1">
+          <button onclick="Live.start('${p.id}')" class="btn btn-p w-9 h-9 text-xs">▶</button>
+          <button onclick="go('builder','${p.id}')" class="btn btn-g w-9 h-9 text-xs">✏️</button>
+          <button onclick="delPlan('${p.id}')" class="btn btn-g w-9 h-9 text-xs">🗑</button>
+        </div>
+      </div>
+    </div>`).join('')}</div>`
+  :`<div class="card p-8 text-center"><div class="text-5xl mb-2">🧩</div><p class="text-sm text-mut">هنوز برنامه‌ای نساختی</p>
+    <button onclick="newPlan()" class="btn btn-p px-5 py-2.5 mt-3 text-sm">+ اولین برنامه</button></div>`}`;
+}
+function newPlan(){
+  const p={id:uid(),title:'برنامه‌ی جدید',color:'pri',ex:[],created:Date.now()};
+  S.plans.unshift(p);save();go('builder',p.id);
+}
+function delPlan(id){if(!confirm('حذف شود؟'))return;S.plans=S.plans.filter(p=>p.id!==id);
+  Object.values(S.schedule).forEach(s=>{if(s.planId===id)s.planId=null});save();renderPlans()}
+
+/* ---------- Builder ---------- */
+function renderBuilder(){
+  const p=S.plans.find(x=>x.id===PARAM); if(!p)return go('plans');
+  const totalSets=p.ex.reduce((a,e)=>a+e.sets.length,0);
+  $('#app').innerHTML=`
+  <button onclick="go('plans')" class="text-xs text-mut mb-2">‹ برگشت</button>
+  <input class="inp !text-lg !font-black mb-3" value="${esc(p.title)}" oninput="plTitle('${p.id}',this.value)">
+  <div class="card p-3 mb-3 flex justify-around text-center text-xs">
+    <div><div class="font-black text-base text-pri">${fa(p.ex.length)}</div><div class="text-mut">حرکت</div></div>
+    <div><div class="font-black text-base text-acc">${fa(totalSets)}</div><div class="text-mut">ست</div></div>
+    <div><div class="font-black text-base">${fa(estMin(p))}′</div><div class="text-mut">زمان</div></div>
+  </div>
+
+  <!-- Quick add -->
+  <div class="card p-3 mb-3">
+    <label class="text-[11px] text-mut">⚡ افزودن سریع (مثال: <b>اسکات 4x8 @80 r90</b>)</label>
+    <div class="flex gap-2 mt-1">
+      <input id="qa" class="inp" placeholder="اسکات 4x8 @80 r90" onkeydown="if(event.key==='Enter')quickAdd('${p.id}')">
+      <button onclick="quickAdd('${p.id}')" class="btn btn-p px-4">➕</button>
+    </div>
+  </div>
+
+  <div class="space-y-3">
+  ${p.ex.map((e,i)=>`
+   <div class="card p-3">
+     <div class="flex items-center gap-2 mb-2">
+       <div class="flex flex-col">
+         <button onclick="mvEx('${p.id}',${i},-1)" class="text-xs text-mut px-1">▲</button>
+         <button onclick="mvEx('${p.id}',${i},1)" class="text-xs text-mut px-1">▼</button>
+       </div>
+       <div class="flex-1 min-w-0">
+         <div class="font-black text-sm truncate">${esc(e.name)}</div>
+         <div class="text-[10px] text-mut">${esc(e.muscle||'')} ${e.ss?`· سوپرست ${e.ss}`:''} ${lastPerf(e.exId)?'· قبلی: '+lastPerf(e.exId):''}</div>
+       </div>
+       <select onchange="setSS('${p.id}',${i},this.value)" class="inp !w-16 !py-1 !text-[11px]">
+         <option value="">—</option>${['A','B','C'].map(g=>`<option ${e.ss===g?'selected':''}>${g}</option>`).join('')}</select>
+       <button onclick="delEx('${p.id}',${i})" class="btn btn-g w-8 h-8 text-xs">🗑</button>
+     </div>
+     <!-- sets table -->
+     <div class="space-y-1">
+       <div class="grid grid-cols-[28px_60px_1fr_1fr_52px_28px] gap-1 text-[9px] text-mut px-1">
+         <span>#</span><span>نوع</span><span>تکرار</span><span>وزن</span><span>استراحت</span><span></span></div>
+       ${e.sets.map((s,j)=>`
+       <div class="grid grid-cols-[28px_60px_1fr_1fr_52px_28px] gap-1 items-center">
+         <div class="text-[11px] text-center font-bold ${s.type==='warmup'?'text-amber-400':''}">${s.type==='warmup'?'W':fa(j+1)}</div>
+         <select class="inp !py-1 !px-1 !text-[10px]" onchange="setS('${p.id}',${i},${j},'type',this.value)">
+           ${[['normal','اصلی'],['warmup','گرم'],['drop','دراپ'],['amrap','AMRAP'],['fail','ناتوان']].map(([v,t])=>`<option value="${v}" ${s.type===v?'selected':''}>${t}</option>`).join('')}</select>
+         <input class="inp !py-1 !px-2 !text-[12px] text-center" value="${esc(s.reps)}" onchange="setS('${p.id}',${i},${j},'reps',this.value)">
+         <input class="inp !py-1 !px-2 !text-[12px] text-center" type="number" step="0.5" value="${s.w??''}" onchange="setS('${p.id}',${i},${j},'w',this.value)">
+         <input class="inp !py-1 !px-1 !text-[11px] text-center" type="number" value="${s.rest??e.rest??90}" onchange="setS('${p.id}',${i},${j},'rest',this.value)">
+         <button onclick="delS('${p.id}',${i},${j})" class="text-[11px] text-red-400">✕</button>
+       </div>`).join('')}
+     </div>
+     <div class="flex gap-1 mt-2">
+       <button onclick="addS('${p.id}',${i})" class="btn btn-g flex-1 py-1.5 text-[11px]">+ ست</button>
+       <button onclick="dupS('${p.id}',${i})" class="btn btn-g flex-1 py-1.5 text-[11px]">📋 کپی آخری</button>
+       <button onclick="schemeMenu('${p.id}',${i})" class="btn btn-g flex-1 py-1.5 text-[11px]">⚡ الگو</button>
+     </div>
+   </div>`).join('')}
+  </div>
+
+  <button onclick="pickExercise('${p.id}')" class="btn btn-p w-full py-3.5 mt-3">➕ افزودن حرکت</button>
+  <button onclick="go('week')" class="btn btn-g w-full py-3 mt-2 text-sm">📅 اتصال به روز هفته</button>`;
+}
+function plTitle(id,v){const p=S.plans.find(x=>x.id===id);p.title=v;save()}
+function mvEx(id,i,d){const p=S.plans.find(x=>x.id===id),j=i+d;if(j<0||j>=p.ex.length)return;
+  [p.ex[i],p.ex[j]]=[p.ex[j],p.ex[i]];save();renderBuilder()}
+function delEx(id,i){const p=S.plans.find(x=>x.id===id);p.ex.splice(i,1);save();renderBuilder()}
+function setSS(id,i,v){const p=S.plans.find(x=>x.id===id);p.ex[i].ss=v||null;save()}
+function setS(id,i,j,k,v){const p=S.plans.find(x=>x.id===id);p.ex[i].sets[j][k]=(k==='reps'||k==='type')?v:(v===''?null:+v);save();if(k==='type')renderBuilder()}
+function addS(id,i){const p=S.plans.find(x=>x.id===id),e=p.ex[i],l=e.sets[e.sets.length-1];
+  e.sets.push(l?structuredClone(l):{type:'normal',reps:'10',w:0,rest:90});save();renderBuilder()}
+function dupS(id,i){addS(id,i)}
+function delS(id,i,j){const p=S.plans.find(x=>x.id===id);p.ex[i].sets.splice(j,1);save();renderBuilder()}
+function schemeMenu(id,i){
+  const SC=[['۳×۱۲ (حجم)',[[12,3]]],['۴×۸',[[8,4]]],['۵×۵ (قدرت)',[[5,5]]],
+   ['هرمی ۱۲-۱۰-۸-۶',[[12,1],[10,1],[8,1],[6,1]]],['۲ گرم + ۳ اصلی','warm']];
+  openSheet(`<h2 class="font-black mb-3">⚡ اعمال الگوی ست</h2>
+   ${SC.map((s,k)=>`<button onclick="applyScheme('${id}',${i},${k})" class="btn btn-g w-full py-3 mb-2 text-sm">${s[0]}</button>`).join('')}`);
+}
+function applyScheme(id,i,k){
+  const p=S.plans.find(x=>x.id===id),e=p.ex[i];
+  const base={type:'normal',w:e.sets[0]?.w||0,rest:e.rest||90};
+  const S4=[[[12,3]],[[8,4]],[[5,5]],[[12,1],[10,1],[8,1],[6,1]],'warm'][k];
+  if(S4==='warm'){e.sets=[{...base,type:'warmup',reps:'12',w:Math.round((base.w||40)*.5)},{...base,type:'warmup',reps:'10',w:Math.round((base.w||40)*.7)},
+    {...base,reps:'8'},{...base,reps:'8'},{...base,reps:'8'}]}
+  else{e.sets=[];S4.forEach(([r,n])=>{for(let z=0;z<n;z++)e.sets.push({...base,reps:String(r)})})}
+  save();closeSheet();renderBuilder();
+}
+function quickAdd(pid){
+  const v=$('#qa').value.trim();if(!v)return;
+  const m=v.match(/^(.+?)\s+(\d+)\s*[x×]\s*([\w\u0600-\u06FF\-]+)(?:\s*@\s*([\d.]+))?(?:\s*r\s*(\d+))?$/i);
+  if(!m)return toast('فرمت: اسکات 4x8 @80 r90','⚠️');
+  const[,name,sets,reps,w,rest]=m;
+  let ex=S.exercises.find(e=>e.name.trim()===name.trim());
+  if(!ex){ex={id:uid(),name:name.trim(),muscle:'عمومی',equip:'',measure:'weight_reps',def:{sets:+sets,reps:+reps||10,rest:+rest||90},desc:'',tip:'',media:[],cover:null,fav:false,uses:0,created:Date.now()};S.exercises.unshift(ex)}
+  addExToPlan(pid,ex.id,{sets:+sets,reps,w:+w||0,rest:+rest||90});
+  $('#qa').value='';toast('اضافه شد ✅','⚡');
+}
+function pickExercise(pid){
+  openSheet(`<h2 class="font-black mb-2">📚 انتخاب حرکت</h2>
+   <input id="exSearch" class="inp mb-3" placeholder="جستجو..." oninput="filterPick('${pid}')">
+   <button onclick="closeSheet();go('exform','new:${pid}')" class="btn btn-p w-full py-2.5 mb-3 text-sm">➕ ساخت حرکت جدید</button>
+   <div id="pickList" class="space-y-1 max-h-[46vh] overflow-y-auto"></div>`);
+  filterPick(pid);
+}
+function filterPick(pid){
+  const q=($('#exSearch')?.value||'').trim();
+  const list=S.exercises.filter(e=>!q||e.name.includes(q)||(e.muscle||'').includes(q)).sort((a,b)=>b.uses-a.uses);
+  $('#pickList').innerHTML=list.map(e=>`
+   <button onclick="addExToPlan('${pid}','${e.id}');closeSheet()" class="card w-full p-2.5 flex items-center gap-2 text-right">
+     <div class="w-9 h-9 rounded-lg bg-surf2 grid place-items-center text-sm">🏋️</div>
+     <div class="flex-1 min-w-0"><div class="font-bold text-sm truncate">${esc(e.name)}</div>
+       <div class="text-[10px] text-mut">${esc(e.muscle)} · ${esc(e.equip||'')}</div></div>
+     <span class="text-pri text-lg">+</span></button>`).join('')||'<p class="text-center text-mut text-xs py-4">چیزی پیدا نشد</p>';
+}
+function addExToPlan(pid,exId,opt={}){
+  const p=S.plans.find(x=>x.id===pid),ex=S.exercises.find(e=>e.id===exId);if(!p||!ex)return;
+  const n=opt.sets||ex.def.sets||3,reps=String(opt.reps??ex.def.reps??10),rest=opt.rest||ex.def.rest||90;
+  const sets=[];for(let i=0;i<n;i++)sets.push({type:'normal',reps,w:opt.w??0,rest});
+  p.ex.push({exId,name:ex.name,muscle:ex.muscle,rest,sets,ss:null});
+  ex.uses++;save();renderBuilder();
+}
+
+/* ==========================================================================
+   ۱۳) کتابخانه‌ی حرکات (با عکس/ویدیو/متن)
+   ========================================================================== */
+let exFilter='';
+function renderExercises(){
+  const list=S.exercises.filter(e=>!exFilter||e.name.includes(exFilter)||(e.muscle||'').includes(exFilter));
+  const groups={};list.forEach(e=>{(groups[e.muscle||'سایر']=groups[e.muscle||'سایر']||[]).push(e)});
+  $('#app').innerHTML=`
+  <div class="flex items-center justify-between mb-3">
+    <h1 class="text-xl font-black">📚 حرکات من</h1>
+    <button onclick="go('exform','new')" class="btn btn-p px-4 py-2 text-sm">+ جدید</button></div>
+  <input class="inp mb-3" placeholder="🔍 جستجو..." value="${esc(exFilter)}" oninput="exFilter=this.value;renderExercises()">
+  ${Object.entries(groups).map(([g,arr])=>`
+   <div class="mb-4"><div class="text-xs text-mut font-bold mb-2">${esc(g)} · ${fa(arr.length)}</div>
+   <div class="grid grid-cols-2 gap-2">${arr.map(e=>`
+    <div onclick="viewEx('${e.id}')" class="card p-3 active:scale-95 transition">
+      <div class="w-full aspect-video rounded-xl bg-surf2 grid place-items-center text-2xl mb-2 overflow-hidden" id="cov_${e.id}">${e.cover?'':'🏋️'}</div>
+      <div class="font-bold text-[13px] truncate">${esc(e.name)}</div>
+      <div class="text-[10px] text-mut truncate">${esc(e.equip||'')} · ${fa(e.def.sets)}×${fa(e.def.reps)}</div>
+      ${bestOf(e.id)?`<div class="text-[10px] text-acc mt-1">🏆 ${fa(bestOf(e.id))}kg</div>`:''}
+    </div>`).join('')}</div></div>`).join('')||'<p class="text-center text-mut py-10">حرکتی نیست</p>'}`;
+  S.exercises.forEach(async e=>{ if(e.cover){const u=await mediaURL(e.cover);const el=$('#cov_'+e.id);
+    if(u&&el)el.innerHTML=`<img src="${u}" class="w-full h-full object-cover">`}});
+}
+async function viewEx(id){
+  const e=S.exercises.find(x=>x.id===id);if(!e)return;
+  const urls=await Promise.all((e.media||[]).map(m=>mediaURL(m)));
+  openSheet(`
+   <div class="flex items-start justify-between gap-2 mb-3">
+     <div><h2 class="font-black text-lg">${esc(e.name)}</h2>
+       <div class="text-[11px] text-mut">${esc(e.muscle)} · ${esc(e.equip||'')}</div></div>
+     <div class="flex gap-1">
+       <button onclick="closeSheet();go('exform','${e.id}')" class="btn btn-g w-9 h-9">✏️</button>
+       <button onclick="delEx2('${e.id}')" class="btn btn-g w-9 h-9">🗑</button></div>
+   </div>
+   <div class="flex gap-2 text-center mb-3">
+     ${stat('🔢',fa(e.def.sets)+'×'+fa(e.def.reps),'پیش‌فرض')}
+     ${stat('⏱️',fa(e.def.rest)+'s','استراحت')}
+     ${stat('🏆',fa(bestOf(e.id))+'kg','رکورد')}
+   </div>
+   ${e.tip?`<div class="card p-3 text-[13px] mb-3 border-r-4" style="border-right-color:rgb(var(--c-acc))">💡 ${esc(e.tip)}</div>`:''}
+   ${e.desc?`<div class="card p-3 text-[13px] leading-7 whitespace-pre-wrap mb-3">${esc(e.desc)}</div>`:''}
+   ${urls.filter(Boolean).length?`<div class="grid grid-cols-2 gap-2">${(e.media||[]).map((m,i)=>{
+      const t=urls[i];if(!t)return'';
+      return S.exercises&&m&&/video/.test(m)?'':`<div class="rounded-xl overflow-hidden bg-surf2" id="mw_${m}"></div>`}).join('')}</div>`:''}
+   <div id="mediaHolder" class="grid grid-cols-2 gap-2"></div>`);
+  /* رندر مدیا */
+  const holder=$('#mediaHolder');
+  for(const mid of (e.media||[])){
+    const rec=await idbGet('media',mid); if(!rec)continue;
+    const u=await mediaURL(mid);
+    holder.insertAdjacentHTML('beforeend', rec.type==='video'
+      ? `<video src="${u}" controls playsinline class="w-full rounded-xl bg-black"></video>`
+      : `<img src="${u}" class="w-full rounded-xl object-cover">`);
+  }
+}
+function delEx2(id){if(!confirm('حذف شود؟'))return;S.exercises=S.exercises.filter(e=>e.id!==id);save();closeSheet();renderExercises()}
+
+function renderExForm(){
+  const isNew=String(PARAM).startsWith('new');
+  const backPlan=String(PARAM).includes(':')?String(PARAM).split(':')[1]:null;
+  const e=isNew?{id:uid(),name:'',muscle:'سینه',equip:'هالتر',measure:'weight_reps',def:{sets:3,reps:10,rest:90},desc:'',tip:'',media:[],cover:null,fav:false,uses:0,created:Date.now()}
+            :structuredClone(S.exercises.find(x=>x.id===PARAM)||{});
+  window._ef=e;
+  $('#app').innerHTML=`
+  <button onclick="history.back();go('exercises')" class="text-xs text-mut mb-2">‹ برگشت</button>
+  <h1 class="text-xl font-black mb-4">${isNew?'➕ حرکت جدید':'✏️ ویرایش حرکت'}</h1>
+  <div class="space-y-3">
+    <div><label class="text-xs text-mut">نام حرکت *</label>
+      <input id="efName" class="inp mt-1" value="${esc(e.name)}" placeholder="مثلاً پرس بالاسینه دمبل"></div>
+    <div class="grid grid-cols-2 gap-2">
+      <div><label class="text-xs text-mut">عضله</label>
+        <input id="efMus" class="inp mt-1" list="muses" value="${esc(e.muscle)}">
+        <datalist id="muses">${['سینه','پشت','پا','سرشانه','بازو','شکم','ساق','هوازی','عمومی'].map(m=>`<option>${m}</option>`).join('')}</datalist></div>
+      <div><label class="text-xs text-mut">تجهیزات</label>
+        <input id="efEq" class="inp mt-1" list="eqs" value="${esc(e.equip||'')}">
+        <datalist id="eqs">${['هالتر','دمبل','دستگاه','کابل','وزن بدن','کتل‌بل','کش','اسمیت'].map(m=>`<option>${m}</option>`).join('')}</datalist></div>
+    </div>
+    <div><label class="text-xs text-mut">نوع سنجش</label>
+      <select id="efMes" class="inp mt-1">
+        ${[['weight_reps','وزن × تکرار'],['reps','فقط تکرار'],['time','زمان (ثانیه)'],['dist','مسافت/زمان']].map(([v,t])=>`<option value="${v}" ${e.measure===v?'selected':''}>${t}</option>`).join('')}</select></div>
+    <div class="card p-3">
+      <div class="text-xs text-mut mb-2">⚙️ پیش‌فرض‌ها (موقع افزودن به برنامه)</div>
+      <div class="grid grid-cols-3 gap-2">
+        <div><label class="text-[10px] text-mut">ست</label><input id="efS" type="number" class="inp mt-1 text-center" value="${e.def.sets}"></div>
+        <div><label class="text-[10px] text-mut">تکرار</label><input id="efR" type="number" class="inp mt-1 text-center" value="${e.def.reps}"></div>
+        <div><label class="text-[10px] text-mut">استراحت</label><input id="efT" type="number" class="inp mt-1 text-center" value="${e.def.rest}"></div>
+      </div>
+    </div>
+    <div><label class="text-xs text-mut">💡 نکته‌ی کوتاه</label>
+      <input id="efTip" class="inp mt-1" value="${esc(e.tip||'')}" placeholder="آرنج نزدیک بدن..."></div>
+    <div><label class="text-xs text-mut">📝 توضیح کامل (متن دلخواه خودت)</label>
+      <textarea id="efDesc" class="inp mt-1" rows="5" placeholder="نحوه اجرا، نکات فرم، اشتباهات رایج...">${esc(e.desc||'')}</textarea></div>
+    <div class="card p-3">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-xs text-mut">🖼️ عکس و ویدیو</span>
+        <label class="btn btn-p px-3 py-1.5 text-xs cursor-pointer">+ افزودن
+          <input type="file" accept="image/*,video/*" multiple class="hidden" onchange="efUpload(this)"></label>
+      </div>
+      <div id="efMedia" class="grid grid-cols-3 gap-2"></div>
+    </div>
+    <button onclick="saveEx(${isNew},'${backPlan||''}')" class="btn btn-p w-full py-3.5">💾 ذخیره</button>
+  </div>`;
+  drawEfMedia();
+}
+async function drawEfMedia(){
+  const h=$('#efMedia');if(!h)return;h.innerHTML='';
+  for(const mid of (_ef.media||[])){
+    const rec=await idbGet('media',mid);if(!rec)continue;const u=await mediaURL(mid);
+    h.insertAdjacentHTML('beforeend',`<div class="relative aspect-square rounded-xl overflow-hidden bg-surf2">
+      ${rec.type==='video'?`<video src="${u}" class="w-full h-full object-cover"></video><div class="absolute inset-0 grid place-items-center text-2xl">▶️</div>`:`<img src="${u}" class="w-full h-full object-cover">`}
+      <button onclick="efDel('${mid}')" class="absolute top-1 left-1 w-6 h-6 rounded-lg bg-black/70 text-xs">✕</button>
+      <button onclick="efCover('${mid}')" class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded-lg bg-black/70 text-[9px]">${_ef.cover===mid?'⭐ کاور':'کاور کن'}</button>
+    </div>`);
+  }
+}
+async function efUpload(inp){
+  for(const f of inp.files){ const id=await addMedia(f); _ef.media.push(id); if(!_ef.cover&&f.type.startsWith('image'))_ef.cover=id; }
+  inp.value='';drawEfMedia();toast('اضافه شد','🖼️');
+}
+function efDel(id){_ef.media=_ef.media.filter(m=>m!==id);if(_ef.cover===id)_ef.cover=_ef.media[0]||null;idbDel('media',id);drawEfMedia()}
+function efCover(id){_ef.cover=id;drawEfMedia()}
+function saveEx(isNew,backPlan){
+  const n=$('#efName').value.trim();if(!n)return toast('اسم حرکت رو بنویس','⚠️');
+  Object.assign(_ef,{name:n,muscle:$('#efMus').value.trim()||'عمومی',equip:$('#efEq').value.trim(),
+    measure:$('#efMes').value,tip:$('#efTip').value.trim(),desc:$('#efDesc').value,
+    def:{sets:+$('#efS').value||3,reps:+$('#efR').value||10,rest:+$('#efT').value||90}});
+  if(isNew)S.exercises.unshift(_ef);
+  else{const i=S.exercises.findIndex(x=>x.id===_ef.id);S.exercises[i]=_ef}
+  save();toast('ذخیره شد ✅','💾');
+  if(backPlan){addExToPlan(backPlan,_ef.id);go('builder',backPlan)}else go('exercises');
+}
+
+/* ==========================================================================
+   ۱۴) تایمر
+   ========================================================================== */
+function renderTimer(){
+  $('#app').innerHTML=`
+  <h1 class="text-xl font-black mb-3">⏱️ تایمر</h1>
+  <div class="card p-5 text-center glow">
+    <div id="tLabel" class="text-xs text-mut mb-2"></div>
+    <div class="relative w-56 h-56 mx-auto">
+      <svg class="ring w-full h-full" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="88" fill="none" stroke="rgb(var(--c-surf2))" stroke-width="12"/>
+        <circle id="tRing" cx="100" cy="100" r="88" fill="none" stroke="url(#g1)" stroke-width="12" stroke-linecap="round"
+          stroke-dasharray="552.9" stroke-dashoffset="0"/>
+        <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="rgb(var(--c-pri))"/><stop offset="100%" stop-color="rgb(var(--c-sec))"/></linearGradient></defs>
+      </svg>
+      <div class="absolute inset-0 grid place-items-center">
+        <div><div id="tTime" class="text-5xl font-black tabular-nums">۰۰:۰۰</div>
+        <div id="tSub" class="text-[11px] text-mut mt-1"></div></div>
+      </div>
+    </div>
+    <div class="flex justify-center gap-2 mt-4">
+      <button onclick="Timer.add(-15)" class="btn btn-g px-3 py-2 text-xs">−۱۵</button>
+      <button onclick="Timer.toggle()" id="tMain" class="btn btn-p px-8 py-3 text-base">▶ شروع</button>
+      <button onclick="Timer.add(15)" class="btn btn-g px-3 py-2 text-xs">+۱۵</button>
+    </div>
+    <button onclick="Timer.reset()" class="btn btn-g px-5 py-1.5 mt-2 text-xs">↺ ریست</button>
+  </div>
+
+  <div class="card p-4 mt-3">
+    <div class="text-xs text-mut mb-2">🎚️ تنظیم زمان دلخواه</div>
+    <div class="flex items-center gap-2">
+      <input id="tMin" type="number" min="0" max="99" value="${Math.floor(Timer.total/60)||1}" class="inp text-center !text-xl !font-black">
+      <span class="font-black">:</span>
+      <input id="tSec" type="number" min="0" max="59" value="${Timer.total%60}" class="inp text-center !text-xl !font-black">
+      <button onclick="setFromInputs()" class="btn btn-p px-4 py-3">تنظیم</button>
+    </div>
+    <div class="flex flex-wrap gap-1.5 mt-3">
+      ${[15,30,45,60,90,120,180,300].map(s=>`<button onclick="Timer.set(${s});Timer.render()" class="chip">${s<60?fa(s)+'s':fa(s/60)+'m'}</button>`).join('')}
+    </div>
+  </div>
+
+  <div class="card p-4 mt-3">
+    <div class="flex items-center justify-between mb-2"><span class="text-xs text-mut">⭐ پریست‌های من</span>
+      <button onclick="newPreset()" class="btn btn-g px-3 py-1 text-[11px]">+ جدید</button></div>
+    <div class="grid grid-cols-2 gap-2">
+     ${S.presets.map(p=>`<button onclick="runPreset('${p.id}')" class="card p-3 text-right active:scale-95">
+       <div class="text-lg">${p.icon||'⏱️'}</div>
+       <div class="font-bold text-[12px] mt-1">${esc(p.name)}</div>
+       <div class="text-[10px] text-mut">${p.type==='interval'?`${fa(p.work)}s کار / ${fa(p.rest)}s استراحت × ${fa(p.rounds)}`:mmss(p.sec)}</div>
+       <div onclick="event.stopPropagation();delPreset('${p.id}')" class="text-[10px] text-red-400 mt-1">حذف</div>
+     </button>`).join('')}
+    </div>
+  </div>
+
+  <div class="card p-4 mt-3">
+    <div class="text-xs text-mut mb-2">🔥 اینتروال سریع (HIIT)</div>
+    <div class="grid grid-cols-3 gap-2">
+      <div><label class="text-[10px] text-mut">کار</label><input id="ivW" type="number" value="30" class="inp mt-1 text-center"></div>
+      <div><label class="text-[10px] text-mut">استراحت</label><input id="ivR" type="number" value="15" class="inp mt-1 text-center"></div>
+      <div><label class="text-[10px] text-mut">دور</label><input id="ivN" type="number" value="8" class="inp mt-1 text-center"></div>
+    </div>
+    <button onclick="Timer.startInterval({work:+ivW.value,rest:+ivR.value,rounds:+ivN.value})" class="btn btn-p w-full py-2.5 mt-2 text-sm">🚀 شروع اینتروال</button>
+  </div>
+
+  <button onclick="go('sounds')" class="btn btn-g w-full py-3 mt-3 text-sm">🔔 مدیریت صداها و زنگ‌ها</button>`;
+  renderTimerFace();
+}
+function renderTimerFace(){
+  const t=$('#tTime');if(!t)return;
+  const pct=Timer.total?Timer.remain/Timer.total:0;
+  t.textContent=mmss(Timer.remain);
+  $('#tRing').style.strokeDashoffset=552.9*(1-pct);
+  $('#tMain').textContent=Timer.running?'⏸ مکث':'▶ شروع';
+  $('#tMain').classList.toggle('pulse-ring',Timer.running);
+  $('#tLabel').textContent=Timer.mode==='interval'
+    ?`اینتروال · دور ${fa(Timer.round)} از ${fa(Timer.interval?.rounds||0)}`:(Timer.label||'شمارش معکوس');
+  $('#tSub').textContent=Timer.mode==='interval'?(Timer.phase==='work'?'💪 کار':'😮‍💨 استراحت'):(Timer.running?'در حال اجرا':'آماده');
+}
+function setFromInputs(){const s=(+$('#tMin').value||0)*60+(+$('#tSec').value||0);if(s<=0)return toast('زمان نامعتبر','⚠️');Timer.set(s);Timer.start()}
+function runPreset(id){const p=S.presets.find(x=>x.id===id);if(!p)return;
+  if(p.type==='interval')Timer.startInterval({work:p.work,rest:p.rest,rounds:p.rounds});
+  else Timer.startCustom(p.sec,{label:p.name});}
+function newPreset(){
+  openSheet(`<h2 class="font-black mb-3">⭐ پریست جدید</h2>
+   <input id="pN" class="inp mb-2" placeholder="اسم (مثلاً استراحت ددلیفت)">
+   <div class="grid grid-cols-2 gap-2 mb-2">
+     <input id="pS" type="number" class="inp" placeholder="ثانیه" value="90">
+     <input id="pI" class="inp" placeholder="ایموجی" value="⏱️"></div>
+   <button onclick="savePreset()" class="btn btn-p w-full py-3">ذخیره</button>`);
+}
+function savePreset(){S.presets.push({id:uid(),name:$('#pN').value||'پریست',sec:+$('#pS').value||60,icon:$('#pI').value||'⏱️'});save();closeSheet();renderTimer()}
+function delPreset(id){S.presets=S.presets.filter(p=>p.id!==id);save();renderTimer()}
+
+/* ==========================================================================
+   ۱۵) صداها
+   ========================================================================== */
+const SND_EV=[['timer_end','🔔 پایان تایمر / استراحت'],['countdown','⏳ شمارش ۳-۲-۱'],['set_done','✅ اتمام ست'],
+  ['start','▶️ شروع'],['pr','🏆 رکورد جدید'],['finish','🎉 پایان تمرین'],['warn','⚠️ هشدار مربی']];
+async function renderSounds(){
+  const all=await new Promise(res=>{if(!IDB)return res([]);const q=IDB.transaction('sounds').objectStore('sounds').getAll();q.onsuccess=()=>res(q.result||[])});
+  window._snds=all;
+  $('#app').innerHTML=`
+  <button onclick="go('timer')" class="text-xs text-mut mb-2">‹ برگشت</button>
+  <h1 class="text-xl font-black mb-1">🔔 صداها و زنگ‌ها</h1>
+  <p class="text-xs text-mut mb-4">آهنگ یا زنگ دلخواه خودت رو آپلود کن و به هر رویداد وصل کن</p>
+  <label class="btn btn-p w-full py-3 mb-4 cursor-pointer">⬆️ آپلود آهنگ / زنگ
+    <input type="file" accept="audio/*" multiple class="hidden" onchange="upSound(this)"></label>
+  <div class="card p-4 mb-3">
+    <div class="text-xs text-mut mb-2">🎵 کتابخانه (${fa(all.length)})</div>
+    ${all.length?all.map(s=>`<div class="flex items-center gap-2 py-2 border-b border-white/5">
+       <button onclick="Snd.playId('${s.id}')" class="btn btn-p w-9 h-9 text-xs">▶</button>
+       <div class="flex-1 min-w-0"><div class="text-[13px] font-bold truncate">${esc(s.name)}</div>
+         <div class="text-[10px] text-mut">${fa(Math.round(s.size/1024))} KB</div></div>
+       <button onclick="Snd.stopAll()" class="btn btn-g w-9 h-9 text-xs">⏹</button>
+       <button onclick="delSound('${s.id}')" class="btn btn-g w-9 h-9 text-xs">🗑</button></div>`).join('')
+     :'<p class="text-xs text-mut text-center py-3">هنوز صدایی آپلود نکردی — از صداهای پیش‌فرض استفاده می‌شه</p>'}
+  </div>
+  <div class="card p-4">
+    <div class="text-xs text-mut mb-3">🎯 تخصیص صدا به رویداد</div>
+    ${SND_EV.map(([ev,t])=>`<div class="mb-3">
+      <div class="flex items-center justify-between mb-1"><span class="text-[12px] font-bold">${t}</span>
+        <button onclick="Snd.fire('${ev}')" class="chip !text-[10px]">تست ▶</button></div>
+      <select class="inp !py-2 !text-[12px]" onchange="bindSound('${ev}',this.value)">
+        <option value="">پیش‌فرض (بوق)</option>
+        ${all.map(s=>`<option value="${s.id}" ${S.settings.bind[ev]===s.id?'selected':''}>${esc(s.name)}</option>`).join('')}
+      </select></div>`).join('')}
+  </div>
+  <div class="card p-4 mt-3">
+    <label class="flex items-center justify-between"><span class="text-sm font-bold">🗣️ صدای مربی (گفتار)</span>
+      <input type="checkbox" ${S.settings.coach.voice?'checked':''} onchange="S.settings.coach.voice=this.checked;save()" class="w-5 h-5 accent-cyan-400"></label>
+    <button onclick="Snd.speak('سلام قهرمان! من مربی تو هستم، بزن بریم')" class="btn btn-g w-full py-2 mt-2 text-xs">تست صدا 🔊</button>
+  </div>`;
+}
+async function upSound(inp){
+  for(const f of inp.files){await idbPut('sounds',{id:uid(),name:f.name.replace(/\.[^.]+$/,''),size:f.size,mime:f.type,blob:f})}
+  inp.value='';toast('آپلود شد 🎵');renderSounds();
+}
+function bindSound(ev,id){S.settings.bind[ev]=id||null;save();if(id)Snd.playId(id)}
+async function delSound(id){await idbDel('sounds',id);Object.keys(S.settings.bind).forEach(k=>{if(S.settings.bind[k]===id)S.settings.bind[k]=null});save();renderSounds()}
+
+/* ==========================================================================
+   ۱۶) جلسه‌ی زنده
+   ========================================================================== */
+function renderSession(){
+  if(!Live.active)return go('home');
+  const p=Live.plan,done=Live.doneSets(),tot=Live.totalSets();
+  const min=Math.round((Date.now()-Live.started)/60000);
+  $('#app').innerHTML=`
+  <div class="card p-4 glow mb-3 sticky top-[62px] z-40">
+    <div class="flex items-center justify-between">
+      <div><div class="font-black">${esc(p.title)}</div>
+        <div class="text-[11px] text-mut">⏱️ ${fa(min)}′ · ${fa(done)}/${fa(tot)} ست · ${fa(Math.round(Live.volume()))}kg</div></div>
+      <button onclick="Live.finish()" class="btn btn-p px-4 py-2 text-xs">🏁 پایان</button>
+    </div>
+    <div class="bar mt-2"><i style="width:${tot?done/tot*100:0}%"></i></div>
+  </div>
+  ${p.ex.map((e,i)=>{
+    const prev=lastPerf(e.exId),pr=bestOf(e.exId);
+    return`<div class="card p-3 mb-3">
+     <div class="flex items-center justify-between mb-2">
+       <div><div class="font-black text-sm">${esc(e.name)} ${e.ss?`<span class="chip !text-[9px]">SS ${e.ss}</span>`:''}</div>
+         <div class="text-[10px] text-mut">${prev?'قبلی: '+prev:'اولین بار'} ${pr?`· 🏆 ${fa(pr)}kg`:''}</div></div>
+       <button onclick="showExInfo('${e.exId}')" class="btn btn-g w-8 h-8 text-xs">ℹ️</button>
+     </div>
+     ${e.sets.map((s,j)=>{const l=Live.log.find(x=>x.k===i+'_'+j);const dn=l&&l.done;
+       return`<div class="setrow grid grid-cols-[26px_1fr_1fr_42px] gap-1.5 items-center mb-1.5 p-1.5 rounded-xl border border-white/5 ${dn?'done':''}">
+        <div class="text-center text-[11px] font-bold ${s.type==='warmup'?'text-amber-400':''}">${s.type==='warmup'?'W':fa(j+1)}</div>
+        <input id="r_${i}_${j}" class="inp !py-1.5 !text-[13px] text-center" value="${l?.r??s.reps}" placeholder="تکرار">
+        <input id="w_${i}_${j}" type="number" step="0.5" class="inp !py-1.5 !text-[13px] text-center" value="${l?.w??s.w??''}" placeholder="وزن">
+        <button onclick="tick(${i},${j})" class="btn ${dn?'btn-p':'btn-g'} h-9 text-sm">${dn?'✓':'○'}</button>
+       </div>`}).join('')}
+     <div class="flex gap-1 mt-1">
+       <button onclick="Live.addSet(${i})" class="btn btn-g flex-1 py-1.5 text-[11px]">+ ست اضافه</button>
+       <button onclick="Timer.startCustom(${e.rest||90},{label:'استراحت'})" class="btn btn-g flex-1 py-1.5 text-[11px]">⏱️ استراحت ${fa(e.rest||90)}s</button>
+     </div>
+    </div>`}).join('')}
+  <button onclick="Live.finish()" class="btn btn-p w-full py-4 text-base mb-4">🏁 پایان تمرین</button>`;
+}
+function tick(i,j){
+  const r=$('#r_'+i+'_'+j).value,w=$('#w_'+i+'_'+j).value;
+  Live.toggleSet(i,j,r,w);
+}
+async function showExInfo(id){ viewEx(id) }
+
+/* ==========================================================================
+   ۱۷) آمار
+   ========================================================================== */
+function renderStats(){
+  const ses=S.sessions,P=S.progress;
+  const vol=ses.reduce((a,s)=>a+s.volume,0),sets=ses.reduce((a,s)=>a+s.sets,0);
+  const weeks=[];for(let i=7;i>=0;i--){const st=Date.now()-i*7*864e5;
+    const v=ses.filter(s=>s.ts>st-7*864e5&&s.ts<=st).reduce((a,s)=>a+s.volume,0);weeks.push(v)}
+  const mx=Math.max(...weeks,1);
+  const prs={};ses.forEach(s=>s.log.forEach(l=>{if(+l.w>(prs[l.name]||0))prs[l.name]=+l.w}));
+  $('#app').innerHTML=`
+  <h1 class="text-xl font-black mb-3">📊 آمار و پیشرفت</h1>
+  <div class="grid grid-cols-2 gap-2 mb-3">
+    ${stat('📆',fa(P.days),'روز تمرین')}${stat('🔥',fa(P.streak),'استریک')}
+    ${stat('🏋️',fa(sets),'کل ست‌ها')}${stat('⚖️',fa(Math.round(vol/1000))+'t','حجم کل')}
+    ${stat('⭐',fa(P.level),'سطح')}${stat('🏆',fa(P.longest),'رکورد استریک')}
+  </div>
+  <div class="card p-4 mb-3">
+    <div class="text-xs text-mut mb-3">📈 حجم تمرین (۸ هفته اخیر)</div>
+    <div class="flex items-end gap-1.5 h-32">${weeks.map((v,i)=>`
+      <div class="flex-1 flex flex-col items-center justify-end gap-1">
+        <div class="w-full rounded-t-lg grad transition-all" style="height:${Math.max(4,v/mx*100)}%"></div>
+        <div class="text-[8px] text-mut">${i===7?'این':fa(8-i)+'ه'}</div></div>`).join('')}</div>
+  </div>
+  ${Object.keys(prs).length?`<div class="card p-4 mb-3">
+    <div class="text-xs text-mut mb-2">🏆 رکوردهای شخصی</div>
+    ${Object.entries(prs).sort((a,b)=>b[1]-a[1]).slice(0,10).map(([n,w])=>`
+      <div class="flex justify-between py-1.5 border-b border-white/5 text-[13px]"><span>${esc(n)}</span><b class="text-acc">${fa(w)} kg</b></div>`).join('')}
+  </div>`:''}
+  <div class="card p-4">
+    <div class="text-xs text-mut mb-2">📜 تاریخچه (${fa(ses.length)})</div>
+    ${ses.length?ses.slice(0,20).map(s=>`
+      <div class="flex items-center gap-3 py-2 border-b border-white/5">
+        <div class="w-9 h-9 rounded-xl grad grid place-items-center text-xs">✓</div>
+        <div class="flex-1"><div class="text-[13px] font-bold">${esc(s.title)}</div>
+          <div class="text-[10px] text-mut">${faDate(new Date(s.ts))} · ${fa(s.sets)} ست · ${fa(Math.round(s.volume))}kg · ${fa(s.dur)}′</div></div>
+      </div>`).join(''):'<p class="text-center text-xs text-mut py-4">هنوز تمرینی ثبت نشده</p>'}
+  </div>`;
+}
+
+/* ==========================================================================
+   ۱۸) عکس پیشرفت + یادداشت
+   ========================================================================== */
+function renderPhotos(){
+  $('#app').innerHTML=`
+  <div class="flex items-center justify-between mb-3">
+    <h1 class="text-xl font-black">📸 عکس‌های پیشرفت</h1>
+    <label class="btn btn-p px-4 py-2 text-sm cursor-pointer">+ افزودن
+      <input type="file" accept="image/*" capture="environment" class="hidden" onchange="addPhoto(this)"></label></div>
+  <div id="phGrid" class="grid grid-cols-2 gap-2"></div>
+  ${!S.photos.length?'<div class="card p-8 text-center mt-2"><div class="text-5xl mb-2">📷</div><p class="text-sm text-mut">هر هفته یه عکس بگیر، پیشرفتت رو ببین!</p></div>':''}`;
+  drawPhotos();
+}
+async function drawPhotos(){
+  const g=$('#phGrid');if(!g)return;g.innerHTML='';
+  for(const p of S.photos){const u=await mediaURL(p.mediaId);if(!u)continue;
+    g.insertAdjacentHTML('beforeend',`<div class="card p-2">
+      <img src="${u}" class="w-full aspect-[3/4] object-cover rounded-xl">
+      <div class="text-[11px] mt-1 font-bold">${faDate(new Date(p.ts))}</div>
+      <div class="text-[10px] text-mut">${p.weight?fa(p.weight)+' kg':''} ${esc(p.note||'')}</div>
+      <button onclick="delPhoto('${p.id}')" class="text-[10px] text-red-400 mt-1">حذف</button></div>`)}
+}
+async function addPhoto(inp){
+  const f=inp.files[0];if(!f)return;const id=await addMedia(f);
+  const w=prompt('وزن امروز (کیلو) — اختیاری');
+  S.photos.unshift({id:uid(),mediaId:id,ts:Date.now(),weight:w?+w:null,note:''});save();inp.value='';
+  renderPhotos();Coach.say('عکس ثبت شد! چند هفته دیگه تفاوت رو می‌بینی 📸🔥',{anim:'cheer',badge:'📸',dur:4000});
+}
+function delPhoto(id){const p=S.photos.find(x=>x.id===id);if(p)idbDel('media',p.mediaId);
+  S.photos=S.photos.filter(x=>x.id!==id);save();renderPhotos()}
+
+function renderNotes(){
+  $('#app').innerHTML=`
+  <div class="flex items-center justify-between mb-3"><h1 class="text-xl font-black">📝 یادداشت‌ها</h1>
+    <button onclick="addNote()" class="btn btn-p px-4 py-2 text-sm">+ جدید</button></div>
+  ${S.notes.length?S.notes.map(n=>`<div class="card p-3 mb-2">
+     <input class="inp !bg-transparent !border-0 !px-0 font-black" value="${esc(n.title)}" oninput="noteSet('${n.id}','title',this.value)">
+     <textarea class="inp mt-1" rows="4" oninput="noteSet('${n.id}','body',this.value)">${esc(n.body)}</textarea>
+     <div class="flex justify-between items-center mt-2">
+       <span class="text-[10px] text-mut">${faDate(new Date(n.ts))}</span>
+       <button onclick="delNote('${n.id}')" class="text-[11px] text-red-400">حذف</button></div>
+   </div>`).join(''):'<div class="card p-8 text-center"><div class="text-5xl mb-2">📝</div><p class="text-sm text-mut">یادداشت تمرین، تغذیه، احساساتت...</p></div>'}`;
+}
+function addNote(){S.notes.unshift({id:uid(),title:'یادداشت جدید',body:'',ts:Date.now()});save();renderNotes()}
+function noteSet(id,k,v){const n=S.notes.find(x=>x.id===id);n[k]=v;save()}
+function delNote(id){S.notes=S.notes.filter(n=>n.id!==id);save();renderNotes()}
+
+/* ==========================================================================
+   ۱۹) تنظیمات
+   ========================================================================== */
+const THEMES=[['neon','نئون پالس','#00D4FF','#7C3AED'],['volcano','آتش‌فشان','#FF6B35','#EF4444'],
+ ['arctic','یخ قطبی','#22D3EE','#94A3B8'],['ocean','اقیانوس شب','#14B8A6','#3B82F6'],
+ ['gold','کربن طلایی','#F59E0B','#EAB308'],['toxic','سبز سمی','#39FF14','#84CC16'],
+ ['violet','بنفش سلطنتی','#A78BFA','#D946EF'],['sunset','غروب وحشی','#FB7185','#F97316']];
+function renderSettings(){
+  const c=S.settings.coach;
+  $('#app').innerHTML=`
+  <h1 class="text-xl font-black mb-3">⚙️ تنظیمات</h1>
+
+  <div class="card p-4 mb-3">
+    <div class="text-xs text-mut mb-3">🎨 تم رنگی</div>
+    <div class="grid grid-cols-4 gap-2">
+     ${THEMES.map(([id,n,a,b])=>`<button onclick="setTheme('${id}')" class="rounded-2xl p-2 border-2 ${S.settings.theme===id?'border-white/70':'border-transparent'}"
+        style="background:linear-gradient(135deg,${a},${b})">
+        <div class="h-7"></div><div class="text-[9px] font-bold text-white drop-shadow">${n}</div></button>`).join('')}
+    </div>
+    <label class="flex items-center justify-between mt-3 text-sm"><span>✨ انیمیشن پس‌زمینه</span>
+      <input type="checkbox" ${S.settings.anim?'checked':''} onchange="S.settings.anim=this.checked;save();applyFx()" class="w-5 h-5 accent-cyan-400"></label>
+    <label class="flex items-center justify-between mt-2 text-sm"><span>🫧 ذرات شناور</span>
+      <input type="checkbox" ${S.settings.particles?'checked':''} onchange="S.settings.particles=this.checked;save();location.reload()" class="w-5 h-5 accent-cyan-400"></label>
+  </div>
+
+  <div class="card p-4 mb-3">
+    <div class="text-xs text-mut mb-3">🤖 مربی شخصی</div>
+    <input class="inp mb-2" value="${esc(c.name)}" placeholder="اسم مربی" onchange="c_set('name',this.value)">
+    <select class="inp mb-2" onchange="c_set('persona',this.value)">
+      ${[['friendly','😊 رفیق صمیمی'],['tough','😤 سخت‌گیر'],['funny','😂 شوخ'],['pro','🧑‍🔬 حرفه‌ای'],['calm','🧘 آرام']]
+        .map(([v,t])=>`<option value="${v}" ${c.persona===v?'selected':''}>${t}</option>`).join('')}</select>
+    <select class="inp mb-2" onchange="c_set('chatty',this.value)">
+      ${[['minimal','🔇 کم‌حرف'],['normal','💬 معمولی'],['chatty','📣 پرحرف']].map(([v,t])=>`<option value="${v}" ${c.chatty===v?'selected':''}>${t}</option>`).join('')}</select>
+    <label class="flex items-center justify-between text-sm"><span>🗣️ صدای گفتار</span>
+      <input type="checkbox" ${c.voice?'checked':''} onchange="c_set('voice',this.checked)" class="w-5 h-5 accent-cyan-400"></label>
+    <label class="flex items-center justify-between text-sm mt-2"><span>🙈 مخفی کردن دستیار</span>
+      <input type="checkbox" ${c.hidden?'checked':''} onchange="c_set('hidden',this.checked);$('#buddy').style.display=this.checked?'none':'block'" class="w-5 h-5 accent-cyan-400"></label>
+    <button onclick="Coach.emit('open')" class="btn btn-g w-full py-2 mt-3 text-xs">تست مربی 🎤</button>
+  </div>
+
+  <div class="card p-4 mb-3">
+    <div class="text-xs text-mut mb-3">⏱️ تایمر</div>
+    <label class="flex items-center justify-between text-sm mb-2"><span>شروع خودکار استراحت بعد هر ست</span>
+      <input type="checkbox" ${S.settings.timer.autoRest?'checked':''} onchange="S.settings.timer.autoRest=this.checked;save()" class="w-5 h-5 accent-cyan-400"></label>
+    <label class="flex items-center justify-between text-sm mb-2"><span>روشن نگه داشتن صفحه</span>
+      <input type="checkbox" ${S.settings.timer.wake?'checked':''} onchange="S.settings.timer.wake=this.checked;save()" class="w-5 h-5 accent-cyan-400"></label>
+    <div class="flex items-center justify-between text-sm"><span>استراحت پیش‌فرض (ثانیه)</span>
+      <input type="number" class="inp !w-24 text-center" value="${S.settings.timer.defaultRest}" onchange="S.settings.timer.defaultRest=+this.value;save()"></div>
+  </div>
+
+  <div class="card p-4 mb-3">
+    <div class="text-xs text-mut mb-3">👤 پروفایل</div>
+    <input class="inp mb-2" value="${esc(S.user.name)}" onchange="S.user.name=this.value;save();render()">
+    <select class="inp" onchange="S.user.goal=this.value;save()">
+      ${['حجم','کات / چربی‌سوزی','قدرت','تناسب اندام'].map(g=>`<option ${S.user.goal===g?'selected':''}>${g}</option>`).join('')}</select>
+  </div>
+
+  <div class="card p-4 mb-3">
+    <div class="text-xs text-mut mb-3">💾 داده‌ها</div>
+    <button onclick="exportData()" class="btn btn-g w-full py-2.5 mb-2 text-sm">⬇️ خروجی گرفتن (JSON)</button>
+    <label class="btn btn-g w-full py-2.5 mb-2 text-sm cursor-pointer">⬆️ بازگردانی
+      <input type="file" accept=".json" class="hidden" onchange="importData(this)"></label>
+    <button onclick="go('sounds')" class="btn btn-g w-full py-2.5 mb-2 text-sm">🔔 صداها</button>
+    <button onclick="if(confirm('همه‌چیز پاک شود؟')){localStorage.clear();indexedDB.deleteDatabase('gymbuddy');location.reload()}" class="btn w-full py-2.5 text-sm bg-red-500/20 text-red-300 border border-red-500/30">🗑 پاک کردن همه‌چیز</button>
+  </div>
+  <p class="text-center text-[10px] text-mut pb-4">ساخته شده با 💪 برای ${esc(S.user.name||'تو')}</p>`;
+}
+function c_set(k,v){S.settings.coach[k]=v;save()}
+function setTheme(id){S.settings.theme=id;save();document.documentElement.dataset.theme=id;renderSettings();
+  Coach.say('تم عوض شد! خوشگل شدی 😎',{anim:'cheer',badge:'🎨',dur:2600,voice:false})}
+function applyFx(){document.body.classList.toggle('no-anim',!S.settings.anim)}
+function exportData(){
+  const b=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);
+  a.download='gymbuddy-'+todayKey()+'.json';a.click();toast('خروجی گرفته شد','⬇️');
+}
+function importData(inp){
+  const f=inp.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{S=deepMerge(structuredClone(DEFAULT),JSON.parse(r.result));save();location.reload()}catch(e){toast('فایل نامعتبر','⚠️')}};
+  r.readAsText(f);
+}
+
+/* ==========================================================================
+   ۲۰) BOOT
+   ========================================================================== */
+(async function boot(){
+  await idbOpen(); seed(); Prog.checkStreak();
+  document.documentElement.dataset.theme=S.settings.theme;
+  applyFx(); particles(); Coach.init();
+  $('#hdStreak').textContent='🔥 '+fa(S.progress.streak);
+  $('#hdSub').textContent=S.user.name?`روز ${fa(S.progress.days+1)}اُم · ${S.user.goal}`:'مربی شخصی تو';
+  const h=location.hash.replace('#/','').split('/');
+  VIEW=h[0]||'home'; PARAM=h[1]||null;
+  if(['session'].includes(VIEW)&&!Live.active)VIEW='home';
+  render();
+  setInterval(()=>{ $('#hdStreak').textContent='🔥 '+fa(S.progress.streak); },30000);
+  /* یادآور آب هر ۳۰ دقیقه حین حضور */
+  setInterval(()=>{ if(!Live.active&&Math.random()<.35)Coach.emit('water') },30*60*1000);
+})();
+</script>
+</body>
+</html>
